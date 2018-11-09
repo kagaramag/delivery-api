@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/djallas/parcels-api.svg?branch=master)](https://travis-ci.org/djallas/parcels-api)
+[![Build Status](https://travis-ci.org/djallas/delivery-api.svg?branch=api)](https://travis-ci.org/djallas/delivery-api)
 [![Coverage Status](https://coveralls.io/repos/github/djallas/delivery-api/badge.svg?branch=api)](https://coveralls.io/github/djallas/delivery-api?branch=api)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/djallas/parcels-api)
 
