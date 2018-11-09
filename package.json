@@ -1,0 +1,46 @@
+{
+  "name": "rest-api",
+  "version": "1.0.0",
+  "description": "A Node.js RESTful API",
+  "main": "index.js",
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "nyc --require babel-core/register mocha test/test.js --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api"
+  ],
+  "author": "Gilles Kagarama",
+  "license": "ISC",
+  "dependencies": {
+    "babel-install": "^2.1.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "joi": "^14.0.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/register": "^7.0.0",
+    "babel": "^6.23.0",
+    "babel-register": "^6.26.0",
+    "chai": "^3.2.0",
+    "chai-http": "^1.0.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.6",
+    "nyc": "^13.1.0",
+    "request": "^2.88.0",
+    "should": "^13.2.3",
+    "superagent": "^4.0.0-beta.5"
+  }
+}

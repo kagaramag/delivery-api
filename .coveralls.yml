@@ -1,0 +1,4 @@
+require 'coveralls'
+Coveralls.wear!
+gem 'coveralls', require: false
+repo_token: DhrCpnTFVMsuZ7CYVNOK0kursh7cnA5WX
