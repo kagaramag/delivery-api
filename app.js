@@ -13,6 +13,7 @@ const userRoutes = require('./v1/routes/users')
 app.use(express.json());
 
 app.use(morgan('dev'));
+
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
