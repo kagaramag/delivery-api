@@ -6,9 +6,8 @@ const port = process.env.PORT || 3100;
 
 const server = http.createServer(app);
 
-require('babel-register');
 
 server.listen(port, () => {
-    console.log("Server restarted successfully")
+    console.log(`Server starts on port: ${port}`)
 });
 
