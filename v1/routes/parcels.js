@@ -50,12 +50,12 @@ router.put('/:id/cancel', (req,res) => {
 //POST new parcel
 router.post('/', (req, res, next) =>{
     // defining schema
-    // const {error} = validateParcel(req.body);
+    const {error} = validateParcel(req.body);
     
-    // if(error){
-    //     res.status(400).send(error.details[0].message);
-    //     return;
-    // }
+    if(error){
+        res.status(400).send(error.details[0].message);
+        return;
+    }
     const parcel = {
         id: parcels.length + 1,
         id_client: req.body.id_client,
