@@ -5,8 +5,9 @@ const morgan = require('morgan');
 
 const bodyParser = require('body-parser');
 
-const parcelRoutes = require('./v1/routes/parcels')
-const userRoutes = require('./v1/routes/users')
+const parcelRoutes = require('./v1/routes/parcels');
+const userRoutes = require('./v1/routes/users');
+const locationRoutes = require('./v1/routes/locations');
 
 
 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 // Routes which should handle request
 app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/locations', locationRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
