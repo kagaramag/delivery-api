@@ -13,6 +13,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "nyc mocha test/ --exit",
+    "freshtall": "rm -rf node_modules && rm -rf package-lock.json && npm install",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint"
   },
