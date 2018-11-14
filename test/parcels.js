@@ -27,19 +27,6 @@ describe('Parcels delivery orders', () => {
             });
         });
     });
-    // POST Parcel
-    // describe('/POST parcels', () => {
-    //     it('it should create parcel order', (done) => {
-    //         chai.request(app)
-    //         .post('/api/v1/parcels')
-    //         .end((err, res) => {
-    //             should.not.exist(err);
-    //             res.should.have.status(200);
-    //             res.body.should.be.a('object');;
-    //         done();
-    //         });
-    //     });
-    // });
     // Get parcel id /GET /parcels/:id
     describe('/GET parcel details', () => {
         it('it should GET a parcel delivery order', (done) => {
