@@ -7,3 +7,6 @@ cache:
 script: npm test
 after_success:
 - npm run coveralls
+
+notication:
+- email:false
