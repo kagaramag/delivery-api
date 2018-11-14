@@ -8,11 +8,11 @@
       "@babel/register"
     ],
     "sourceMap": false,
-    "instrument": false
+    "instrument": true
   },
   "scripts": {
     "start": "nodemon server.js",
-    "test": "nyc --require babel-core/register mocha test/ --exit",
+    "test": "nyc mocha test/ --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint"
   },
@@ -37,6 +37,7 @@
     "babel-register": "^6.26.0",
     "chai": "^3.2.0",
     "chai-http": "^1.0.0",
+    "coveralls": "^3.0.2",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
