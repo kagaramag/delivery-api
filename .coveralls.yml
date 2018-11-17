@@ -1,3 +1,0 @@
-require 'coveralls'
-Coveralls.wear!
-repo_token: Ert7XEJmIxHAg5Nl12RljqYXBwgZCYE88
