@@ -3,14 +3,15 @@ const parcels = require('./../data/parcels');
 
 const Joi = require("joi");
 
+
 // get all parcels orders
-exports.parcels_get_all = (req, res, next) =>{ 
+exports.findAll = (req, res, next) =>{ 
     res.status(200).send({
         parcels: parcels
     });
 };
 // get one order
-exports.parcels_get_one_order = (req, res, next) =>{ 
+exports.findOne = (req, res, next) =>{ 
     const id = parseInt(req.params.id);    
     parcels.map((parcel) => {
         if(parcel.id === id){
@@ -23,7 +24,7 @@ exports.parcels_get_one_order = (req, res, next) =>{
 };
 
 //cancel one order
-exports.parcels_cancel_order = (req, res, next) => {
+exports.cancelOne = (req, res, next) => {
         // look up parcel
     // if not exist, retur 404
     const parcel = parcels.find(p => p.id  === parseInt(req.params.id));
@@ -45,7 +46,7 @@ exports.parcels_cancel_order = (req, res, next) => {
 }
 
 // cancel parcel order
-exports.parcels_create_new_order = (req, res, next) =>{
+exports.create = (req, res, next) =>{
     // defining schema
     const {error} = validateParcel(req.body);
     
