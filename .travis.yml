@@ -1,9 +1,13 @@
+sudo: false
 language: node_js
 node_js:
   - "stable"
-cache:
-  directories:
-    - "node_modules"
-script: npm test
-after_success:
-- npm run coveralls
+# script: npm test
+# after_success:
+#   - npm run coverage
+
+before_install:
+- "npm install -g npm@'>=3.5.1'"
+after_script:
+- "npm run test:cov"
+- "npm install coveralls && cat ./coverage/lcov.info | coveralls"

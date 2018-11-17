@@ -1,7 +1,7 @@
 {
   "name": "rest-api",
   "version": "1.0.0",
-  "description": "A Node.js RESTful API",
+  "description": "RESTful API for Parcels Develivery APP",
   "main": "index.js",
   "nyc": {
     "require": [
@@ -27,20 +27,18 @@
     "babel-install": "^2.1.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "joi": "^14.0.4",
+    "joi": "^14.0.6",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.5",
-    "@babel/register": "^7.0.0",
-    "babel": "^6.23.0",
     "babel-register": "^6.26.0",
-    "chai": "^3.2.0",
+    "chai": "^3.5.0",
     "chai-http": "^1.0.0",
-    "eslint": "^5.8.0",
+    "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.6",
     "nyc": "^13.1.0",
     "request": "^2.88.0",
