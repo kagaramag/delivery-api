@@ -20,8 +20,7 @@
     "test1": "nyc report --reporter=text --require babel-register mocha test/parcels.js --exit",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test/",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "cover": "npm run cover istanbul cover _mocha --exit",
-    "coveralls": "npm run cover --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "npm run cover  --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "lint": "eslint"
   },
   "keywords": [
@@ -59,10 +58,8 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
-    "cat": "^0.2.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
-    "codecov.io": "^0.1.6",
     "cover": "^0.2.9",
     "coveralls": "^3.0.2",
     "eslint": "^5.8.0",
