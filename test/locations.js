@@ -5,20 +5,20 @@ let chaiHttp = require('chai-http');
 let server = require('../server');
 let app = require('../app');
 let should = chai.should();
-let parcels = require('../v1/routes/parcels');
+let locations = require('../v1/routes/locations');
 
 
 chai.use(chaiHttp);
 
 
 //Our parent block
-describe('Parcels delivery orders', () => {
+describe('Locations records', () => {
   // clearn data before any testing 
     // get all parcels /GET /parcels
-    describe('/GET parcels', () => {
-        it('it should GET all the parcels', (done) => {
+    describe('/GET locations', () => {
+        it('it should GET all locations records', (done) => {
           chai.request(app)
-            .get('/api/v1/parcels')
+            .get('/api/v1/locations')
             .end((err, res) => {
                 should.not.exist(err);
                 res.should.have.status(200);
@@ -27,13 +27,14 @@ describe('Parcels delivery orders', () => {
             });
         });
     });
-    // Get parcel id /GET /parcels/:id
-    describe('/GET parcel details', () => {
-        it('it should GET a parcel delivery order', (done) => {
+
+    // Get location id /GET 
+    describe('/GET location details', () => {
+        it('it should GET a location by parcel', (done) => {
             const id = 1;
             chai
             .request(app)
-            .get(`/api/v1/parcels/${id}`)
+            .get(`/api/v1/locations/${id}`)
             .end((err, res) => {
                 should.not.exist(err);
                 res.should.have.status(200);

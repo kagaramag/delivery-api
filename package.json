@@ -10,7 +10,7 @@
     "cache": false,
     "reporter": [
       "lcov",
-      "html"
+      "text"
     ]
   },
   "scripts": {
