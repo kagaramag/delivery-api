@@ -1,16 +1,16 @@
 // const express = require('express');
 import express from 'express';
 
+import morgan from 'morgan';
+
+import bodyParser from 'body-parser';
+// import routes
+import parcelRoutes from './v1/routes/parcels';
+import userRoutes from './v1/routes/users';
+import locationRoutes from './v1/routes/locations';
+import ErrorController from './controllers/ErrorController';
+
 const app = express();
-import { morgan } from 'mogan';
-
-const bodyParser = require('body-parser');
-
-const parcelRoutes = require('./v1/routes/parcels');
-const userRoutes = require('./v1/routes/users');
-const locationRoutes = require('./v1/routes/locations');
-
-
 
 app.use(express.json());
 
@@ -29,11 +29,13 @@ app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);
 
-app.use((req, res, next) => {
-    const error = new Error("Not found");
-    error.status = 404;
-    next(error);
-});
+app.use(ErrorController.NotFound);
+
+// app.use((req, res, next) => {
+//     const error = new Error("Not found");
+//     error.status = 404;
+//     next(error);
+// });
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500 );
