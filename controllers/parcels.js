@@ -1,8 +1,6 @@
+import Joi from 'joi';
 
-const parcels = require('./../data/parcels');
-
-const Joi = require("joi");
-
+import parcels from './../data/parcels';
 
 // get all parcels orders
 exports.findAll = (req, res, next) =>{ 
