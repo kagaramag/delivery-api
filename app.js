@@ -1,7 +1,8 @@
-const express = require('express');
-const app = express();
+// const express = require('express');
+import express from 'express';
 
-const morgan = require('morgan');
+const app = express();
+import { morgan } from 'mogan';
 
 const bodyParser = require('body-parser');
 
