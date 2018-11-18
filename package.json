@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "start": "node server.js --presets es2015",
+    "start": "nodemon  --require babel-register server.js --exit",
     "begin": "babel-node server.js --presets es2015,stage-2",
     "test": "nyc --require babel-register mocha test/ --exit",
     "test1": "nyc report --reporter=text --require babel-register mocha test/parcels.js --exit",
@@ -30,7 +30,6 @@
   "license": "ISC",
   "dependencies": {
     "joi": "^14.0.6",
-    "morgan": "^1.9.1",
     "chai": "^4.2.0",
     "express": "^4.16.4"
   },
@@ -67,6 +66,7 @@
     "express": "^4.16.4",
     "lcov-parse": "^1.0.0",
     "mocha": "^5.2.0",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.5",
     "nyc": "^13.1.0",
     "supertest": "^3.3.0"
