@@ -1,11 +1,12 @@
 process.env.NODE_ENV = 'test';
 //Require the dev-dependencies
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../server');
-let app = require('../app');
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+// import server from '../server';
+// let app = require('../app');
+import app from '../app';
 let should = chai.should();
-let parcels = require('../v1/routes/parcels');
+// import parcels from '../v1/routes/parcels';
 
 
 chai.use(chaiHttp);
