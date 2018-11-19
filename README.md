@@ -22,7 +22,7 @@ This document provides guidelines and examples for Parcel Delivery APIs, encoura
 ## HTTP Verbs
 
 | Methods | Endpoints | Actions |
-| :---: | :---: | :---: |
+--- | --- | ---
 | /GET | api/v1/parcels | Fetch all parcels orders |
 | /GET | /api/v1/parcles/:id | Fetch a specific parcel delivery order |
 | /GET | /api/v1/users/:id/parcels | Fetch all parcel delivery orders by a specific user |
@@ -31,8 +31,18 @@ This document provides guidelines and examples for Parcel Delivery APIs, encoura
 
 # UI Screenshots
 
+## Homepage
 ![Homepage of SendIt](https://github.com/djallas/delivery-api/blob/master/images/home.png "Homepage")
 
-# Author: Gilles
+## Login
+![Login Page](https://github.com/djallas/delivery-api/blob/master/images/login.png "Login")
+
+# Author: 
+
+### Gilles Kagarama
+
+[Twitter: @kagaramag](https://www.twitter/kagaramag)
+[Scotch.io: @kagarama](https://scotch.io/@gilles)
+
 
 
