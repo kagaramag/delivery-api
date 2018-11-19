@@ -4,6 +4,7 @@ import express from 'express';
 import morgan from 'morgan';
 
 import bodyParser from 'body-parser';
+
 // import routes
 import parcelRoutes from './v1/routes/parcels';
 import userRoutes from './v1/routes/users';
@@ -24,25 +25,15 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-// Routes which should handle request
+
+// pool takes the object above -config- as parameter
+
+ // Routes which should handle request
 app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);
 
 app.use(ErrorController.NotFound);
+app.use(ErrorController.InternalServerError);
 
-// app.use((req, res, next) => {
-//     const error = new Error("Not found");
-//     error.status = 404;
-//     next(error);
-// });
-
-app.use((error, req, res, next) => {
-    res.status(error.status || 500 );
-    res.json({
-        error: {
-            message: error.message
-        }
-    })
-});
 module.exports = app;
