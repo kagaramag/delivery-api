@@ -10,7 +10,8 @@
     "cache": false,
     "reporter": [
       "lcov",
-      "text"
+      "text",
+      "html"
     ]
   },
   "scripts": {
@@ -20,7 +21,7 @@
     "test1": "nyc report --reporter=text --require babel-register mocha test/parcels.js --exit",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test/",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "coveralls": "npm run cover  --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint"
   },
   "keywords": [
