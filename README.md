@@ -9,13 +9,46 @@ Welcome to SendIT Delivery Order App API
 
 # Parcel Delivery App
 
-# How to Install
-
-# How to Run App
-
-# Guidelines
+# Information
 
 This document provides guidelines and examples for Parcel Delivery APIs, encouraging consistency, maintainability, and best practices across applications. Parcel Delivery APIs aim to balance a truly RESTful API interface with a positive developer experience.
+
+# Tools
+
+1. Frontend: Html, CSS, Javascript
+2. Backend: NodeJS & ExpressJS
+3. Database: PostgreSQL
+
+# How to Install
+
+### Initiate node
+
+```
+npm init
+```
+
+### Installing dependencies
+
+```
+npm install
+```
+### Run the tests
+
+```
+npm run test
+```
+
+### Update modules
+
+```
+npm update
+```
+
+## How to Run App
+
+```
+npm start
+```
 
 # Table of API Endpoints
 
