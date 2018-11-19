@@ -22,7 +22,8 @@
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test/",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint"
+    "lint": "eslint",
+    "pg": "nodemon server.js"
   },
   "keywords": [
     "node",
@@ -34,7 +35,8 @@
   "dependencies": {
     "joi": "^14.0.6",
     "chai": "^4.2.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "pg": "7.0.2"
   },
   "babel": {
     "presets": [
@@ -75,6 +77,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.5",
     "nyc": "^13.1.0",
+    "pg-pool": "^2.0.4",
     "supertest": "^3.3.0"
   },
   "directories": {
