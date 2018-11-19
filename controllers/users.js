@@ -3,6 +3,34 @@ import Joi from 'joi';
 import parcels from './../data/parcels';
 import users from './../data/users';
 
+//postgre
+import pg from 'pg';
+const config = {
+    user: 'postgres',
+    database: 'sendit',
+    password: '123123',
+    port: 5432
+}
+const pool = new pg.Pool(config);
+
+exports.findAllUsersInPostgre = (req, res,) => {
+    pool.connect(function(err,client,done) {
+       if(err){
+           console.log("not able to get connection "+ err);
+           res.status(400).send(err);
+       } 
+       client.query('SELECT * FROM users',function(err,result) {
+           done(); // closing the connection;
+           if(err){
+               console.log(err);
+               res.status(400).send(err);
+           }
+           res.status(200).send(result.rows);
+       });
+    });
+    res.setTimeout(200);
+};
+
 // /GET parcels by user id
  exports.findParcelsByUserId= (req, res) => {
     const id = req.params.id;
