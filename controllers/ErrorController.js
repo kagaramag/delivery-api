@@ -3,3 +3,12 @@ exports.NotFound = (req, res, next) =>{
     error.status = 404;
     next(error);
 };
+
+exports.InternalServerError = (req, res) => {
+    res.status(error.status || 500 );
+    res.json({
+        error: {
+            message: error.message
+        }
+    })
+}
