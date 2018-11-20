@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test';
+const babel = require('babel-core');
 //Require the dev-dependencies
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -7,7 +8,12 @@ import chaiHttp from 'chai-http';
 import app from '../app';
 let should = chai.should();
 // import parcels from '../v1/routes/parcels';
-
+// babel.transform(data, {
+//     presets: ['babel-preset-babili'],
+//     plugins,
+//     compact: true,
+//     comments: false
+//   });
 
 chai.use(chaiHttp);
 
