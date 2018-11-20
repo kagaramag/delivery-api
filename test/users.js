@@ -7,7 +7,13 @@ let app = require('../app');
 let should = chai.should();
 let users = require('../v1/routes/users');
 let parcels = require('../v1/routes/parcels');
-
+const babel = require('babel-core');
+// babel.transform(data, {
+//     presets: ['babel-preset-babili'],
+//     plugins,
+//     compact: true,
+//     comments: false
+//   });
 
 chai.use(chaiHttp);
 
