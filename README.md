@@ -56,11 +56,16 @@ npm start
 
 | Methods | Endpoints | Actions |
 --- | --- | ---
-| /GET | api/v1/parcels | Fetch all parcels orders |
-| /GET | /api/v1/parcles/:id | Fetch a specific parcel delivery order |
-| /GET | /api/v1/users/:id/parcels | Fetch all parcel delivery orders by a specific user |
-| /PUT | /api/v1/parcels/:id/cancel | Cancel the specific delivery order |
-| /POST | /api/v1/parcels/ | Create a parcel delivery order |
+| GET | api/v1/parcels | Fetch all parcels orders |
+| GET | /api/v1/parcles/:parcelId | Fetch a specific parcel delivery order |
+| GET | /api/v1/users/:userId/parcels | Fetch all parcel delivery orders by a specific user |
+| PUT | /api/v1/parcels/:parcelId/cancel | Cancel the specific delivery order |
+| POST | /api/v1/parcels | Create a parcel delivery order |
+| PUT | /api/v1/parcels/:parcelId/status | Change the status of specific delivery order |
+| PUT | /api/v1/parcels/:parcelId/presentLocation | Change the present location of a specific parcel delivery order |
+| POST | /api/v1/auth/signup | Register a user |
+| POST | /api/v1/auth/login | Login a user |
+| PUT | /api/v1/parcels/:parcelId/destination | Change the location of a specific parcle delivery order |
 
 # UI Screenshots
 
