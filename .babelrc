@@ -1,12 +1,13 @@
 {
-    "presets": [
-      "env"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "nyc"
-        ]
-      }
+  "presets": [
+    "es2015",
+    "stage-2"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "nyc"
+      ]
     }
+  }
 }
