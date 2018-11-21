@@ -142,6 +142,24 @@ exports.makeUserActive = (req,res,next) => {
     }
 }
 
+exports.UserUpdate = (req,res,next) => {
+    // look up user
+    const user = users.find(p => p.id  === parseInt(req.params.id));
+    // if not exist, retur 404
+    if(!user) res.status(404).send("Parcel order with given id was not found");
+    // validate, if invalid, return 400 -bad request
+    const { error } = validateUser(req.body);
+    
+    if(error){
+        res.status(400).send(error.details[0].message);
+        return;
+    }
+    // update user
+    user.name = req.body.name;
+    // return the updated user
+    res.send(user);
+}
+
 // validating user
 function validateUser(user){
     // defining schema
