@@ -1,5 +1,7 @@
+// Joi, validation helper
 import Joi from 'joi';
 
+// import json data
 import parcels from './../data/parcels';
 
 // get all parcels orders
