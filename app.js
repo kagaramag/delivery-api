@@ -1,11 +1,11 @@
-// const express = require('express');
+// import express
 import express from 'express';
-
+// import morgan for http logger
 import morgan from 'morgan';
-
+// import body-parser
 import bodyParser from 'body-parser';
 
-// import routes
+// import routes handlers
 import parcelRoutes from './v1/routes/parcels';
 import userRoutes from './v1/routes/users';
 import locationRoutes from './v1/routes/locations';
@@ -20,13 +20,12 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+// ALLOW CORS
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
-// pool takes the object above -config- as parameter
 
  // Routes which should handle request
 app.use('/api/v1/parcels', parcelRoutes);
