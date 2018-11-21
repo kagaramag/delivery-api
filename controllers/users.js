@@ -1,10 +1,13 @@
+// Joi, validation helper
 import Joi from 'joi';
 
+// import json data
 import parcels from './../data/parcels';
 import users from './../data/users';
 
+
 //postgre
-import pg from 'pg';
+const pg = require('pg');
 const config = {
     user: 'postgres',
     database: 'sendit',
