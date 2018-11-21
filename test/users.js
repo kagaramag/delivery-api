@@ -1,22 +1,18 @@
 process.env.NODE_ENV = 'test';
+
 //Require the dev-dependencies
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../server');
-let app = require('../app');
+
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+
+// import app file
+import app from '../app';
+
+// use should in unit testing
 let should = chai.should();
-let users = require('../v1/routes/users');
-let parcels = require('../v1/routes/parcels');
-const babel = require('babel-core');
-// babel.transform(data, {
-//     presets: ['babel-preset-babili'],
-//     plugins,
-//     compact: true,
-//     comments: false
-//   });
 
+// user chai-http middleware
 chai.use(chaiHttp);
-
 
 //Our parent block
 describe('Users', () => {
