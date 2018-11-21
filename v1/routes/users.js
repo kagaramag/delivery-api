@@ -1,10 +1,14 @@
+// require express
 import express from 'express';
 
+// register router
 const router = express.Router();
 
-import UsersController from '../../controllers/users';
+// import users controller
+import UsersController from './../../controllers/users';
 
-// db connection
+
+// db connection [test: getting started]
 router.get('/all', UsersController.findAllUsersInPostgre);
 
 // get all parcels orders by user id
@@ -15,8 +19,7 @@ router.get('/', UsersController.findAllUsers);
 //GET user details
 router.get('/:id', UsersController.findUserDetails);
 
-
-//POST new parcel
+//POST sign up
 router.post('/', UsersController.createNewUser);
 
 // make a user inactive
@@ -27,42 +30,7 @@ router.put('/:id/active', UsersController.makeUserActive);
 
 // update user profile info
 // for now, i only update the name of the user
-router.put('/:id/update', (req,res) => {
-    // look up user
-    const user = users.find(p => p.id  === parseInt(req.params.id));
-    // if not exist, retur 404
-    if(!user) res.status(404).send("Parcel order with given id was not found");
-    // validate, if invalid, return 400 -bad request
-    const { error } = validateUser(req.body);
-    
-    if(error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
-    // update user
-    user.name = req.body.name;
-    // return the updated user
-    res.send(user);
-});
-// update user password
-router.put('/:id/reset-password', (req,res) => {
-    // look up user
-    const user = users.find(p => p.id  === parseInt(req.params.id));
-    // if not exist, retur 404
-    if(!user) res.status(404).send("Parcel order with given id was not found");
-    // validate, if invalid, return 400 -bad request
-    const { error } = validateUser(req.body);
-    
-    if(error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
-    // update password
-    user.password = req.body.password;
-    // return the updated user
-    res.send(user);
-});
-
+router.put('/:id/update', UsersController.UserUpdate);
 
 // validating user
 function validateUser(user){
