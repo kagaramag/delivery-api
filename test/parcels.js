@@ -1,6 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 //Require the dev-dependencies
+
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
@@ -10,6 +11,7 @@ import app from '../app';
 // use should in unit testing
 let should = chai.should();
 
+// user chai-http middleware
 chai.use(chaiHttp);
 
 
