@@ -1,19 +1,14 @@
 process.env.NODE_ENV = 'test';
-const babel = require('babel-core');
+
 //Require the dev-dependencies
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-// import server from '../server';
-// let app = require('../app');
+
+// import app file
 import app from '../app';
+
+// use should in unit testing
 let should = chai.should();
-// import parcels from '../v1/routes/parcels';
-// babel.transform(data, {
-//     presets: ['babel-preset-babili'],
-//     plugins,
-//     compact: true,
-//     comments: false
-//   });
 
 chai.use(chaiHttp);
 
@@ -27,7 +22,7 @@ describe('Parcels delivery orders', () => {
           chai.request(app)
             .get('/api/v1/parcels')
             .end((err, res) => {
-                should.not.exist(err);
+                chai.expect(err).to.not.exist;
                 res.should.have.status(200);
                 res.body.should.be.a('object');;
             done();
