@@ -6,7 +6,6 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 
 // import routes handlers
-import parcelRoutes from './v1/routes/parcels';
 import userRoutes from './v1/routes/users';
 import locationRoutes from './v1/routes/locations';
 import ErrorController from './controllers/ErrorController';
@@ -28,7 +27,6 @@ app.use((req, res, next) => {
 });
 
  // Routes which should handle request
-app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);
 
