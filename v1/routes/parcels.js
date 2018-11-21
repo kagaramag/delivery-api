@@ -1,9 +1,7 @@
-
-import express from 'express';
+const express = require('express');
 
 const router = express.Router();
-
-import ParcelsController from '../../controllers/parcels';
+const ParcelsController = require('../../controllers/parcels');
 
 // #LET'S CONTROLLERS DO THE WORK
 
