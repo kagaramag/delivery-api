@@ -7,8 +7,6 @@ const router = express.Router();
 // import parcels controller
 import ParcelsController from './../../controllers/parcels';
 
-// #LET'S CONTROLLERS DO THE WORK
-
 // get all parcels orders
 router.get('/', ParcelsController.findAll);
 // get order details
