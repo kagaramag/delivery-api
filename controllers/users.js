@@ -2,92 +2,76 @@
 import Joi from 'joi';
 
 // import json data
-import parcels from './../data/parcels';
-import users from './../data/users';
-
-
-//postgre
-const pg = require('pg');
-const config = {
-    user: 'postgres',
-    database: 'sendit',
-    password: '123123',
-    port: 5432
-}
-const pool = new pg.Pool(config);
-
-exports.findAllUsersInPostgre = (req, res,) => {
-    pool.connect(function(err,client,done) {
-       if(err){
-           console.log("not able to get connection "+ err);
-           res.status(400).send(err);
-       } 
-       client.query('SELECT * FROM users',function(err,result) {
-           done(); // closing the connection;
-           if(err){
-               console.log(err);
-               res.status(400).send(err);
-           }
-           res.status(200).send(result.rows);
-       });
-    });
-    res.setTimeout(200);
-};
+const knex = require('./../db/knex');
 
 // /GET parcels by user id
  exports.findParcelsByUserId= (req, res) => {
-    const id = req.params.id;
-    const result = parcels.filter(c => c.id_client == id);
-    if(result.id_client === id){
-        return result
-    }
-    res.status(200).send({
-        parcels:result
-    });
+    const id = parseInt(req.params.id);  
+    knex
+    .raw(`select * from parcels where id_client = ${id}`)
+    .then((user) => {
+        res.status(200).send(user.rows);
+    })
+    req.setTimeout(500);
 };
 // find all users
 exports.findAllUsers = (req, res, next) => {
-    res.status(200).send({
-        users: users
-    });
+    knex
+    .raw('select * from users')
+    .then((users) => {
+        res.status(200).send(users.rows);
+    })
 }
 // find users details
 exports.findUserDetails = (req, res, next) => {
-    const id = parseInt(req.params.id);    
-    users.map((user) => {
-        if(user.id === id){
-            return res.status(200).send({
-                user:user
-            });
-        }
-    });
+    const id = parseInt(req.params.id);  
+    knex
+    .raw(`select * from users where id = ${id}`)
+    .then((user) => {
+        res.status(200).send(user.rows);
+    })
     req.setTimeout(500);
 }
 
 // create new user
-exports.createNewUser = (req, res, next) => {
-    // defining schema
-    const {error} = validateUser(req.body);
+exports.createNewUser = (req, res) => {
+    knex('users')
+    .insert({
+        id:19,
+        name: "yes",
+        email: 'k@gma.com',
+        password: 4521,
+        state:'active'
+    })
+    .then(() => {
+        res.status(200).send({
+            message:'user registered successfully'
+        });
+    })
 
-    if(error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
-    const user = {
-        id: users.length + 1,
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        state: 'active',
-        role: 'client',
-        created_time: req.body.created_time
-    };
-    users.push(user);
-    res.send(user);
+
+    // defining schema
+    // const {error} = validateUser(req.body);
+
+    // if(error){
+    //     res.status(400).send(error.details[0].message);
+    //     return;
+    // }
+    // const user = {
+    //     id: users.length + 1,
+    //     name: req.body.name,
+    //     email: req.body.email,
+    //     password: req.body.password,
+    //     state: 'active',
+    //     role: 'client',
+    //     created_time: req.body.created_time
+    // };
+    // users.push(user);
+    // res.send(user);
     
-    res.send({
-        message:user
-    });
+    // res.send({
+    //     message:user
+    // });
     req.setTimeout(200);
 }
 
