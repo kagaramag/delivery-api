@@ -103,33 +103,39 @@ describe('Parcels delivery orders', () => {
         });
     });
 
+    // record new location for destination change
+    describe('/PUT new destination', () => {
+        it('it should record new location', (done) => {
+            const id = 1;
+            chai
+            .request(app)
+            .put(`/api/v1/parcels/${id}/destination`)
+            .end((err, res) => {
+                should.not.exist(err);
+                res.body.should.be.a('object');
+                // parcel.should.have.property('state').equal('created')
+                // res.should.have.status(200);             
+            done();
+            });              
+        });
+    });
 
-    // // create
-    // describe('/GET parcels', () => {
-    //     it('it should GET all the parcels', (done) => {
-    //       chai.request(app)
-    //         .post('/api/v1/parcels')
-    //         .end((err, res) => {
-    //             chai.expect(err).to.not.exist;
-    //             res.should.have.status(200);
-    //             res.should.not.have.status(404);
-    //             res.body.should.be.a('object');
-    //             parcel.should.have.property('id');
-    //             parcel.should.have.property('id_client');
-    //             parcel.should.have.property('title');
-    //             parcel.should.have.property('title');
-    //             parcel.should.have.property('weight');
-    //             parcel.should.have.property('state');
-    //             parcel.should.have.property('weight');
-    //             parcel.should.have.property('pickup');
-    //             parcel.should.have.property('dropoff');
-    //             parcel.should.have.property('distance');
-    //             parcel.should.have.property('created_time');
-    //             parcel.should.have.property('modified_at');
-    //         done();
-    //         });
-    //     });
-    // });  
+    // updates status
+    describe('/PUT update status', () => {
+        it('it should update status', (done) => {
+            const id = 1;
+            chai
+            .request(app)
+            .put(`/api/v1/parcels/${id}/status`)
+            .end((err, res) => {
+                should.not.exist(err);
+                res.body.should.be.a('object');
+                // parcel.should.have.property('state').equal('created')
+                res.should.have.status(200);             
+            done();
+            });              
+        });
+    });
 
 });
 
