@@ -16,9 +16,9 @@ router.get('/:id', ParcelsController.findOne);
 // create new parcel order
 router.post('/', ParcelsController.create);
 // Set package destination
-// router.put('/:id/destination', ParcelsController.setDestination);
+router.put('/:id/destination', ParcelsController.destination);
 // // Change package status
-// router.put('/:id/status', ParcelsController.changeStatus);
+router.put('/:id/status', ParcelsController.changeStatus);
 // // Change present location
 // router.put('/:id/status', ParcelsController.presentLocation);
 
