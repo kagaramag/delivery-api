@@ -3,12 +3,14 @@ import Joi from 'joi';
 
 // import json data
 import parcels from './../data/parcels';
+import locations from './../data/locations';
 
 // get all parcels orders
 exports.findAll = (req, res, next) =>{ 
     res.status(200).send({
         parcels: parcels
     });
+    req.setTimeout(500);
 };
 // get one order
 exports.findOne = (req, res, next) =>{ 
@@ -43,6 +45,7 @@ exports.cancelOne = (req, res, next) => {
     parcel.state = 'cancel';
     // return the updated parcel
     res.send(parcel);
+    req.setTimeout(500);
 }
 
 // cancel parcel order
@@ -70,11 +73,15 @@ exports.create = (req, res, next) =>{
     };
     parcels.push(parcel);
     res.send(parcel);
-    
-    res.send({
-        message:parcels
-    })
 };
+
+// create destination of a parcel
+// exports.setDestination = (req, res, next) =>{
+//   const id = req.params.id;
+//   res.send({
+//       message:id
+//   })
+// };
 
 // validating one parcel inputs
 // validating parcel
