@@ -1,7 +1,7 @@
-exports.NotFound = (req, res, next) =>{ 
-    const error = new Error("404, Not found");
-    error.status = 404;
-    next(error);
+exports.NotFound = (req, res) =>{ 
+    res.status(404).send({
+        message: "Error 404. Page not found"
+    });
 };
 
 exports.InternalServerError = (req, res) => {
