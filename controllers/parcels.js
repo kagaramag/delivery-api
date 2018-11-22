@@ -1,26 +1,25 @@
 // Joi, validation helper
 import Joi from 'joi';
 
-const knex = require('./../db/knex');
-
+// import json data
+import parcels from './../data/parcels';
 
 // get all parcels orders
 exports.findAll = (req, res, next) =>{ 
-    knex
-    .raw('select * from parcels')
-    .then(function(parcels){
-        res.status(200).send(parcels.rows);
-        req.setTimeout(500);
-    })
+    res.status(200).send({
+        parcels: parcels
+    });
 };
 // get one order
 exports.findOne = (req, res, next) =>{ 
-    const id = parseInt(req.params.id);  
-    knex
-    .raw(`select * from parcels where id = ${id}`)
-    .then(function(parcels){
-        res.status(200).send(parcels.rows);
-    })
+    const id = parseInt(req.params.id);    
+    parcels.map((parcel) => {
+        if(parcel.id === id){
+            return res.status(200).send({
+                parcel:parcel
+            });
+        }
+    });
     req.setTimeout(500);
 };
 
