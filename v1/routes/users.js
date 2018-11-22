@@ -27,7 +27,7 @@ router.post('/', UsersController.createNewUser);
 
 // update user profile info
 // for now, i only update the name of the user
-router.put('/:id/update', UsersController.UserUpdate);
+// router.put('/:id/update', UsersController.UserUpdate);
 
 // validating user
 function validateUser(user){
