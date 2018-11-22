@@ -10,8 +10,8 @@
 		"pickup": "porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo",
 		"dropoff": "porta elit, a feugiat tellus lorem eu metus. In lorem.",
 		"distance": 1,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 2,
@@ -24,8 +24,8 @@
 		"pickup": "sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id",
 		"dropoff": "sit amet, dapibus id, blandit at, nisi. Cum sociis natoque",
 		"distance": 3,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 3,
@@ -38,8 +38,8 @@
 		"pickup": "hendrerit a, arcu. Sed et libero. Proin mi. Aliquam gravida",
 		"dropoff": "tristique ac, eleifend vitae, erat. Vivamus nisi. Mauris nulla. Integer",
 		"distance": 6,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 4,
@@ -52,8 +52,8 @@
 		"pickup": "ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam",
 		"dropoff": "dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit",
 		"distance": 4,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 5,
@@ -66,8 +66,8 @@
 		"pickup": "pellentesque. Sed dictum. Proin eget odio. Aliquam vulputate ullamcorper magna.",
 		"dropoff": "justo. Proin non massa non ante bibendum ullamcorper. Duis cursus,",
 		"distance": 3,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 6,
@@ -80,8 +80,8 @@
 		"pickup": "odio vel est tempor bibendum. Donec felis orci, adipiscing non,",
 		"dropoff": "sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices",
 		"distance": 8,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 7,
@@ -94,8 +94,8 @@
 		"pickup": "nec, imperdiet nec, leo. Morbi neque tellus, imperdiet non, vestibulum",
 		"dropoff": "id magna et ipsum cursus vestibulum. Mauris magna. Duis dignissim",
 		"distance": 8,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 8,
@@ -108,8 +108,8 @@
 		"pickup": "non justo. Proin non massa non ante bibendum ullamcorper. Duis",
 		"dropoff": "tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum",
 		"distance": 1,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 9,
@@ -122,8 +122,8 @@
 		"pickup": "risus odio, auctor vitae, aliquet nec, imperdiet nec, leo. Morbi",
 		"dropoff": "eu turpis. Nulla aliquet. Proin velit. Sed malesuada augue ut",
 		"distance": 7,
-		"created_time": "0000-00-00",
-		"modified_at": "0000-00-00"
+		"created_time": "2018-12-12",
+		"modified_at": "2018-12-12"
 	},
 	{
 		"id": 10,
