@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node server.js ",
     "begin": "babel-node server.js --presets es2015,stage-2",
+    "build": "npm run clean && npm run build-babel",
     "test": "nyc --reporter=text --reporter=lcov mocha --timeout 10000 --require babel-register test/ --exit ",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint",
