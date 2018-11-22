@@ -8,9 +8,6 @@ const router = express.Router();
 import UsersController from './../../controllers/users';
 
 
-// db connection [test: getting started]
-router.get('/all', UsersController.findAllUsersInPostgre);
-
 // get all parcels orders by user id
 router.get('/:id/parcels', UsersController.findParcelsByUserId);
 // GET list of all users
@@ -23,10 +20,10 @@ router.get('/:id', UsersController.findUserDetails);
 router.post('/', UsersController.createNewUser);
 
 // make a user inactive
-router.put('/:id/inactive', UsersController.makeUserInactive);
+// router.put('/:id/inactive', UsersController.makeUserInactive);
 
 // make a user active
-router.put('/:id/active', UsersController.makeUserActive);
+// router.put('/:id/active', UsersController.makeUserActive);
 
 // update user profile info
 // for now, i only update the name of the user
