@@ -5,6 +5,7 @@ import Joi from 'joi';
 import parcels from './../data/parcels';
 import locations from './../data/locations';
 
+
 // get all parcels orders
 exports.findAll = (req, res, next) =>{ 
     res.status(200).send({
