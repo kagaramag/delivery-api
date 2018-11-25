@@ -32,6 +32,12 @@ describe('Auth HTTP Verbs', () => {
         .send(user)
         .end((err, res) => {
             res.should.have.status(200);
+            user.should.have.property('id');
+            user.should.have.property('name');
+            user.should.have.property('email');
+            user.should.have.property('password');
+            user.should.have.property('state');
+            user.should.have.property('role');
             res.body.should.be.a('object');
             done();
         });
