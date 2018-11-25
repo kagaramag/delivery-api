@@ -5,61 +5,48 @@ import Joi from 'joi';
 import parcels from './../data/parcels';
 import locations from './../data/locations';
 
+import pool from './../db/config';
 
 // get all parcels orders
 exports.findAll = (req, res, next) =>{ 
-    res.status(200).send({
-        parcels: parcels
+    pool.query('SELECT * from parcels').then(response =>{
+        res.status(200).json({
+            parcels: response.rows
+        });
+    }).catch(err =>{
+        console.log(err)
     });
-    req.setTimeout(500);
 };
 // get one order
 exports.findOne = (req, res, next) =>{ 
-    const id = parseInt(req.params.id);    
-    parcels.map((parcel) => {
-        if(parcel.id === id){
-            return res.status(200).send({
-                parcel:parcel
-            });
-        }
-    });
-    req.setTimeout(500);
+    
+    const id = parseInt(req.params.id); 
+
+    pool.query(`SELECT * from parcels  where id = ${id}`).then(response =>{
+        res.status(200).json({
+            parcel: response.rows
+        });
+    }).catch(err =>{
+        console.log(err)
+    });    
 };
 
 //cancel one order
 exports.cancelOne = (req, res, next) => {
-        // look up parcel
-    // if not exist, return 404
-    const parcel = parcels.find(p => p.id  === parseInt(req.params.id));
-    if(!parcel) res.status(404).send("Parcel order with given id was not found");
 
-    // validate, if invalid, return 400 -bad request
-    // defining schema
-
-    const { error } = validateParcel(req.body);
-    
-    if(error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
-    // update parcel
-    parcel.state = 'cancel';
-    // return the updated parcel
-    res.send(parcel);
-    req.setTimeout(500);
+    const id = parseInt(req.params.id); 
+    pool.query(`UPDATE parcels SET state = 'cancel'  where id = ${id}`).then(response =>{
+        res.status(200).json({
+            message:"Parcel order cancelled successully"
+        });
+    }).catch(err =>{
+        console.log(err)
+    });  
 }
-
 // cancel parcel order
 exports.create = (req, res, next) =>{
-    // defining schema
-    const {error} = validateParcel(req.body);
-    
-    if(error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
     const parcel = {
-        id: parcels.length + 1,
+        id: req.body.id,
         id_client: req.body.id_client,
         id_postman: req.body.id_postman,
         title: req.body.title,
@@ -72,8 +59,31 @@ exports.create = (req, res, next) =>{
         created_time: req.body.created_time,
         modified_at: req.body.modified_at
     };
-    parcels.push(parcel);
-    res.send(parcel);
+    // aid of pool to insert data into db
+    pool.query('INSERT INTO parcels(id, id_postman,  title, description, weight, state, pickup, dropoff, distance, created_time, updated_time) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+    [
+        parcel.id, 
+        parcel.id_client,
+        parcel.id_postman,
+        parcel.title,
+        parcel.description,
+        parcel.weight,
+        parcel.state,
+        parcel.pickup,
+        parcel.dropoff,
+        parcel.distance,
+        parcel.created_time
+    ])
+    .then(res =>{
+        res.status(200).send({
+            message: "Record successfully inserted"
+        });
+    }).catch(err =>{
+        console.log("unable");
+    }); 
+    req.setTimeout(2000);
+    // parcels.push(parcel);
+    // res.send(parcel);
 };
 
 // create destination of a parcel
