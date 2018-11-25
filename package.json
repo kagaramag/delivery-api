@@ -2,11 +2,9 @@
   "name": "rest-api",
   "version": "1.0.0",
   "description": "RESTful API for Parcels Develivery APP",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js ",
-    "begin": "babel-node server.js --presets es2015,stage-2",
-    "build": "npm run clean && npm run build-babel",
     "test": "nyc --reporter=text --reporter=lcov mocha --timeout 10000 --require babel-register test/ --exit ",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint",
@@ -24,8 +22,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "joi": "^14.0.6",
-    "knex": "^0.15.2",
-    "pg": "^7.0.2",
+    "pg": "^7.6.1",
     "swagger": "^0.7.5",
     "ui": "^0.2.4"
   },
@@ -39,7 +36,6 @@
     "cover": "^0.2.9",
     "coveralls": "^3.0.2",
     "expect": "^23.6.0",
-    "knex-cli": "^1.0.2",
     "lcov-parse": "^1.0.0",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
@@ -47,6 +43,7 @@
     "nodemon": "^1.18.6",
     "nyc": "^13.1.0",
     "pg-pool": "^2.0.4",
+    "swagger-ui-express": "^4.0.1",
     "uuid": "^3.3.2"
   },
   "directories": {
