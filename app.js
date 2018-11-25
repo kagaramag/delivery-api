@@ -28,6 +28,13 @@ app.use((req, res, next) => {
     next();
 });
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
+
 // Routes which should handle request
 app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
