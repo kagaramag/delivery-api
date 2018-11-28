@@ -59,7 +59,7 @@ const create = (req, response, next) =>{
             });
         } else {
             response.send({
-                message: `Locations: "${parcel.title}" has been registered successfully!`
+                message: `Locations: "${location.title}" has been registered successfully!`
             });
         }
     });

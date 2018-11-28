@@ -1,0 +1,34 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Parcel Delivery App",
+      "description": "API documentation for Parcel Delivery courier services"
+    },
+    "servers" : [
+      {"url" : "localhost:3100"},
+      {"url" : "https://parcels-app.herokuapp.com/"}
+      ],
+    "paths": {
+      "/api/v1/parcels":{
+           "get": {
+            "tags": ["api1"],
+            "description": "Fetch all parcels",
+            "operationId": "findAll",
+           "responses": {
+             "200": {
+               "description": "Parcels loaded succesfully",
+               "content": {
+                 "application/json; charset=utf-8": {
+                   "schema":{
+                     "type": "object"
+                     },
+                     "example": {}
+                   }
+                 }
+               }
+             }
+            }
+          }
+     }
+  }
