@@ -4,7 +4,10 @@ const router = express.Router();
 
 import LocationsController from './../../controllers/locations';
 
-// GET list of all locations
-router.post('/', LocationsController.create);
+// Authaticate
+import Auth from './../../db/jwt';
+
+// Record location
+router.post('/', Auth, LocationsController.create);
 
 export default router;
