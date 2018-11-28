@@ -4,17 +4,24 @@ import Joi from 'joi';
 
 import pool from './../db/config';
 
+// validators 
+
+import validator from './../validation/index';
+
 // manage auth
 import jwt from 'jsonwebtoken';
 import Auth from './../db/jwt';
+import validation from '../validation';
 // IMPORT SECRET DATA
 require('dotenv').config();
+
+const saltRounds = 10;
 const bcrypt = require('bcrypt');
 
 // create new user
 const createNewUser = (req, response, next) => {
     
-    const saltRounds = 10;
+    
     const password = req.body.password;
     const hash = bcrypt.hashSync(password, saltRounds);
     try{      
@@ -50,45 +57,39 @@ const createNewUser = (req, response, next) => {
 
 // login user
 const loginUser = (req, res, next) => {
-    console.log('route is valid')
-    // insert code here to actually authenticate, or fake it
-    const user = { 
-        email: req.body.email,
-        password: req.body.password
-     }
-     console.log(user);
-    // pool.query(`SELECT * from users where email = ${user.email} and password = ${user.password}`).then(response =>{
-    //     res.status(200).json({
-    //         user: response.rows
-    //     });
-    // }).catch(err =>{
-    //     console.log(err)
-    // });
-    
-    // const user = { id: 3 };
-    // // then return a token, secret key should be an env variable
-    // const token = jwt.sign({ user: user.id }, process.env.SECRET);
-    // res.json({
-    //   message: 'Authenticated! Use this token in the "Authorization" header',
-    //   token: token
-    // });
-    // res.send({
-    //     message:"Failure to authicate you!"
-    // });
+    const email = validator.emailIsValid(req.body.email,res);
+    const password = validator.passwordIsValid(req.body.password);
+    if(!email && !password){       
+        res.send({
+            message: "Invalid inputs"
+        })
+    }else{
+        pool.query(`SELECT * from users where email = $1 LIMIT 1`, [email]).then(response =>{
+          
+            if(!response.rows) return res.status(401).send({message:'not found'});
+            if(!response.rows[0]) return res.status(401).send({message:'not found'});
+            const { userId } = response.rows[0];
+            const verify = bcrypt.compare(password, response.rows[0].password)
+            if(verify){
+            const token = jwt.sign({ user: userId }, process.env.SECRET);
+            return res.status(200).send({token});
+            } 
+            return res.status(200).send({user: response.rows[0]});
+        }).catch(err =>{
+            console.log(err)
+        }); 
+    }
 }
 
-// validating user
+// // validating user
 // function validateUser(user){
 //     // defining schema
 //     const schema = {
 //         name: Joi.string().max(30).min(3).required(),
-//         email: Joi.string().email().min(6).max(60).required(),
-//         password: Joi.string().min(4).max(23).required(),
-//         state: Joi.string().required(),
-//         role: Joi.string().required(),
-//         created_time: Joi.date(),
+//         email: Joi.string().email().min(6).max(60).required();
 //     };
 //     return Joi.validate(user, schema);
 // }
+
 
 export default { createNewUser, loginUser }
