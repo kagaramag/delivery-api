@@ -1,3 +1,5 @@
+
+    const URL = 'http://localhost:3100/api/v1/';
 // switch nav bar
 function toggleSidebar() {
     var m = document.getElementById("sidebar");

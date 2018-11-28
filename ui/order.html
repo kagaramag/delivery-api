@@ -10,7 +10,9 @@
     <meta name="keywords" content="Oders">
     <meta name="author" content="Gilles Kagarama">
     <link rel="stylesheet" href="css/style.0.1.css">
+    <script src="scripts/jquery-3.3.1.min.js"></script>
     <script src="scripts/scripts.js"></script>
+    <script src="scripts/order.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     <style>
         #canvas{width:100%;height:800px;;background: grey}
@@ -18,6 +20,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCnmF76KmYp7VSKH0E_N6q7jgig3N-gzo&libraries=places" type="text/javascript"></script>
 </head>
 <body id="body">
+    <div class="loading"></div> 
     <!-- start header -->
     <header class="on-scroll-shadow">
             <div class="container">
@@ -39,12 +42,10 @@
                     <div class="s4 m1 l3 hide-on-small hide-on-medium">
                         <div class="right">
                             <ul class="list-inline mainmenu">
-                                <li><a href="../index.html">Home</a>
-                                <li><a href="../index.html#how-it-work">How it work?</a> </li>
-                                <li><a href="../index.html#pricing">Pricing </a> </li>
-                                <li><a href="../index.html#contact" class="btn jazzberry text-white radius-5">Contact us</a> </li>
-                                <li><a href="login.html">Login</a> </li>
-                                <li><a href="register.html">Register</a> </li>
+                                <li><a href="/index.html">Home</a>
+                                <li><a href="/account.html" class="bold">
+                                    <span class="fas fa-user-circle l-text"></span>
+                                    Gilles Kagarama</a> </li>
                             </ul>
                         </div>
                     </div>
@@ -59,13 +60,13 @@
             <div class="container">  
                     <div class="s4 m4 l1">
                         <ul class="sidebar">
-                            <li><a href="#"><span class="fas fa-cube"></span> Parcel Orders</a></li>
+                            <li><a href="./dashboard.html"><span class="fas fa-cube"></span> Dashboard</a></li>
                             <li><a href="#"><span class="fas fa-user"></span> Profile</a></li>
                             <li><a href="#"><span class="fas fa-bell"></span> Notifications</a></li>
                             <li><a href="#"><span class="fas fa-sign-out-alt"></span> Logout</a></li>
                         </ul>
                         </div>
-                        <div class="s4 m4 l3">                
+                        <div class="s4 m4 l3">               
                                 <div class="row xl-v-margin">
                                         <div class="s1 m1 l1 shadow-2 radius-3">
                                             <div class="xl-v-padding">
@@ -76,32 +77,42 @@
                                         </div>
                                         <div class="s3 m3 l3 shadow-2 radius-3">
                                             <div class="m-h-padding">
-                                                <h2 class="xl-text">Order: 1.4kg box</h2>
-                                                <div>Created: Oct 31, 2018</div>
+                                                <h2 class="xl-text" id="title"><div class="placeholder xl-v-padding"></div></h2>
+                                                <div id="description"><div class="placeholder xl-v-padding"></div></div>
                                             </div>
-                                            <div class="divider grey"></div>
                                             <div class="l-padding">
-                                                <span class="left">
-                                                    Status: <span class="m-padding grey radius-6">In Transit</span>
-                                                </span>
-                                                <span class="right">
-                                                    <a href="#" class="red m-padding grey text-white radius-6">Cancel</a>
-                                                </span>
+                                                    <div class="l2">
+                                                        <div class="placeholder l-v-padding"></div>
+                                                    </div>
+                                                    <div class="l2">
+                                                        <div class="placeholder l-v-padding"></div>
+                                                    </div>
                                                 <div class="clear"></div>
                                             </div>
                                             <div class="divider grey"></div>
                                             <div class="l-padding">
-                                                <span class="left">
-                                                    Pickup: Impact Hub
-                                                </span>
-                                                <span class="right">
-                                                    Dropoff: Klab
-                                                </span>
+                                                <div class="l2" id="pickup">
+                                                    <div class="placeholder l-v-padding"></div>
+                                                </div>
+                                                <div class="l2" id="dropoff">
+                                                    <div class="placeholder l-v-padding"></div>
+                                                </div>
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="clear"></div>
+                                    <br>
+                                    <div class="s4 m4 l4 shadow-2 radius-3">                                    
+                                        <div id="locations" class="row l-padding">
+                                            <div class='oneparcel'>
+                                                <div class="s1 m1 l1 bold"># Created</div>
+                                                <div class="s1 m1 l1 bold">Longitude</div>
+                                                <div class="s1 m1 l1 bold">Latitude</div>
+                                                <div class="s1 m1 l1 bold">Messate</div>
+                                            </div>
+                                        </div>                                    
+                                    </div>                                    
                                     <br>
                     <table class="bordered left-align  shadow-2 radius-1">
                         <tr>
