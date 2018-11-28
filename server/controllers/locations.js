@@ -49,29 +49,6 @@ const create = (req, response, next) =>{
     req.setTimeout(10000);
 };
 
-// // create destination of a parcel
-// const destination = (req, res, next) =>{
-//     const id = req.params.id;
-//     const {error} = validateLocation(req.body);    
-//     if(error){
-//         res.status(400).send(error.details[0].message);
-//         return;
-//     }   
-//     const location = {
-//         id: locations.length + 1,
-//         latitude: req.body.latitude,
-//         longitude: req.body.longitude,
-//         id_parcel: id,
-//         message: req.body.message,
-//         created_time: req.body.created_time
-//     };     
-    
-//     locations.push(location);
-//     res.send(location);
-
-// };
-
-
 // // verify location
 function validateLocation(location){
     const schema = {
