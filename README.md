@@ -3,7 +3,7 @@
 # Parcel Delivery App 
 [![Build Status](https://travis-ci.org/djallas/delivery-api.svg?branch=develop)](https://travis-ci.org/djallas/delivery-api)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/djallas/parcels-api)
-[![Coverage Status](https://coveralls.io/repos/github/djallas/delivery-api/badge.svg?branch=develop)](https://coveralls.io/github/djallas/delivery-api?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/djallas/delivery-api/badge.png?branch=develop)](https://coveralls.io/github/djallas/delivery-api?branch=develop)
 
 # Information
 
