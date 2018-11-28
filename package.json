@@ -2,25 +2,10 @@
   "name": "rest-api",
   "version": "1.0.0",
   "description": "RESTful API for Parcels Develivery APP",
-  "main": "index.js",
-  "nyc": {
-    "sourceMap": false,
-    "instrument": false,
-    "report-dir": ".nyc_output",
-    "cache": false,
-    "reporter": [
-      "lcov",
-      "text",
-      "html"
-    ]
-  },
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon  --require babel-register server.js --exit",
-    "begin": "babel-node server.js --presets es2015,stage-2",
-    "test": "nyc --require babel-register mocha test/ --exit",
-    "test1": "nyc report --reporter=text --require babel-register mocha test/parcels.js --exit",
-    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test/",
-    "report-coverage": "cat ./coverage/lcov.info | codecov",
+    "start": "nodemon --exec babel-node ./server/server.js ",
+    "test": "nyc --reporter=text --reporter=lcov mocha --timeout 10000 --require babel-register ./server/test/ --exit ",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint",
     "pg": "nodemon server.js"
@@ -33,52 +18,36 @@
   "author": "Gilles Kagarama",
   "license": "ISC",
   "dependencies": {
-    "joi": "^14.0.6",
-    "chai": "^4.2.0",
+    "bcrypt": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
     "express": "^4.16.4",
-    "pg": "7.0.2"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "stage-0"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "istanbul"
-        ]
-      }
-    }
+    "joi": "^14.2.0",
+    "moment": "^2.22.2",
+    "pg": "^7.6.1",
+    "swagger": "^0.7.5",
+    "ui": "^0.2.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/node": "^7.0.0",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-plugin-istanbul": "^5.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "cover": "^0.2.9",
     "coveralls": "^3.0.2",
-    "eslint": "^5.8.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
     "expect": "^23.6.0",
-    "express": "^4.16.4",
-    "istanbul": "^0.4.5",
+    "jsonwebtoken": "^8.4.0",
     "lcov-parse": "^1.0.0",
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.5",
+    "nodemon": "^1.18.7",
     "nyc": "^13.1.0",
     "pg-pool": "^2.0.4",
-    "supertest": "^3.3.0"
+    "swagger-ui-express": "^4.0.1",
+    "uuid": "^3.3.2"
   },
   "directories": {
     "test": "test"
