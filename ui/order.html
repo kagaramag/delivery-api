@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to SendIT</title>
+    <link rel="icon" href="images/icon.png">
+    <meta name="description" content="Account">
+    <meta name="keywords" content="Oders">
+    <meta name="author" content="Gilles Kagarama">
+    <link rel="stylesheet" href="css/style.0.1.css">
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="scripts/scripts.js"></script>
+    <script src="scripts/order.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <style>
+        #canvas{width:100%;height:800px;;background: grey}
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCnmF76KmYp7VSKH0E_N6q7jgig3N-gzo&libraries=places" type="text/javascript"></script>
+</head>
+<body id="body">
+    <div class="loading"></div> 
+    <!-- start header -->
+    <header class="on-scroll-shadow">
+            <div class="container">
+                <nav>
+                <div class="s4 m4 l1">
+                        <ul class="list-inline left-align">
+                            <li class="">
+                                <a href="#" class="xl-text hide-on-large" onclick="toggleSidebar();return false;">
+                                    <span class="fas fa-bars m-margin"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="logo">
+                                    <img src="images/logo.svg" alt="">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="s4 m1 l3 hide-on-small hide-on-medium">
+                        <div class="right">
+                            <ul class="list-inline mainmenu">
+                                <li><a href="/index.html">Home</a>
+                                <li><a href="/account.html" class="bold">
+                                    <span class="fas fa-user-circle l-text"></span>
+                                    Gilles Kagarama</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="clear"></div>
+        </header>
+    <!-- account -->
+    <div class="clear"></div>
+    <section>
+        <div class="row">
+            <div class="container">  
+                    <div class="s4 m4 l1">
+                        <ul class="sidebar">
+                            <li><a href="./dashboard.html"><span class="fas fa-cube"></span> Dashboard</a></li>
+                            <li><a href="#"><span class="fas fa-user"></span> Profile</a></li>
+                            <li><a href="#"><span class="fas fa-bell"></span> Notifications</a></li>
+                            <li><a href="#"><span class="fas fa-sign-out-alt"></span> Logout</a></li>
+                        </ul>
+                        </div>
+                        <div class="s4 m4 l3">               
+                                <div class="row xl-v-margin">
+                                        <div class="s1 m1 l1 shadow-2 radius-3">
+                                            <div class="xl-v-padding">
+                                                <div class="image">
+                                                    <img src="images/open-box.png" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="s3 m3 l3 shadow-2 radius-3">
+                                            <div class="m-h-padding">
+                                                <h2 class="xl-text" id="title"><div class="placeholder xl-v-padding"></div></h2>
+                                                <div id="description"><div class="placeholder xl-v-padding"></div></div>
+                                            </div>
+                                            <div class="l-padding">
+                                                    <div class="l2">
+                                                        <div class="placeholder l-v-padding"></div>
+                                                    </div>
+                                                    <div class="l2">
+                                                        <div class="placeholder l-v-padding"></div>
+                                                    </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="divider grey"></div>
+                                            <div class="l-padding">
+                                                <div class="l2" id="pickup">
+                                                    <div class="placeholder l-v-padding"></div>
+                                                </div>
+                                                <div class="l2" id="dropoff">
+                                                    <div class="placeholder l-v-padding"></div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <br>
+                                    <div class="s4 m4 l4 shadow-2 radius-3">                                    
+                                        <div id="locations" class="row l-padding">
+                                            <div class='oneparcel'>
+                                                <div class="s1 m1 l1 bold"># Created</div>
+                                                <div class="s1 m1 l1 bold">Longitude</div>
+                                                <div class="s1 m1 l1 bold">Latitude</div>
+                                                <div class="s1 m1 l1 bold">Messate</div>
+                                            </div>
+                                        </div>                                    
+                                    </div>                                    
+                                    <br>
+                    <table class="bordered left-align  shadow-2 radius-1">
+                        <tr>
+                            <th>#</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th> &nbsp; </th>
+                        </tr>
+                        <tr>
+                            <td class="center-align">1</td>
+                            <td>
+                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                <span class="text-red">Created: Sept 4, 2018</span>
+                            </td> 
+                            <td class="center-align">Delivered</td>
+                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                        </tr>
+                        <tr>
+                            <td class="center-align">2</td>
+                            <td>
+                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                <span class="text-red">Created: Sept 4, 2018</span>
+                            </td> 
+                            <td class="center-align">Delivered</td>
+                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                        </tr>
+                        <tr>
+                            <td class="center-align">3</td>
+                            <td>
+                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                <span class="text-red">Created: Sept 4, 2018</span>
+                            </td> 
+                            <td class="center-align">Delivered</td>
+                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                        </tr>
+                        <tr>
+                            <td class="center-align">4</td>
+                            <td>
+                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                <span class="text-red">Created: Sept 4, 2018</span>
+                            </td> 
+                            <td class="center-align">Delivered</td>
+                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                        </tr>
+                    </table>                   
+                    <div id="canvas" class="center"></div>
+                </div>
+            </div>
+        </div>
+    </section> 
+<script>
+        var directionsService = new google.maps.DirectionsService();
+        var directionsDisplay = new google.maps.DirectionsRenderer();
+
+        var map;
+                
+        var pickup = new google.maps.LatLng(-1.958394, 30.069553);
+        var dropoff = new google.maps.LatLng(-1.944676, 30.0897449);
+        
+        var mapOptions = {
+            zoom:14,
+            center:pickup
+        }        
+        map = new google.maps.Map(document.getElementById('canvas'), mapOptions);
+        directionsDisplay.setMap(map);
+        function calculateRoute(){
+            var request = {
+                origin: pickup,
+                destination: dropoff,
+                travelMode:'DRIVING'
+            }
+            directionsService.route(request,function(result, status){
+                if(status == 'OK'){
+                    directionsDisplay.setDirections(result);
+                }
+            });
+        }
+        calculateRoute();
+</script>
+<div class="clear"></div>
+    <br>
+    <br>
+    <div id="sidebar" class="hide white shadow-5">
+        <a href="#" onclick="closeSidebar();return false;" class="right white l-margin m-padding radius-1 shadow-2"> <span class="fas fa-times"></span> </a>
+        <ul class="list-block mainmenu">
+            <li><a href="index.html">Home</a> </li>
+            <li><a href="index.html#how-it-work">How it work?</a> </li>
+            <li><a href="index.html#pricing">Pricing </a> </li>
+            <li><a href="index.html#contact">Contact us</a> </li>
+            <li><a href="login.html">Login</a> </li>
+            <li><a href="register.html">Register</a></li>
+        </ul>                    
+    </div>    
+    <footer class="indigo darken-3 text-white">
+        <div class="container center-align">
+            <div class="xl-padding">
+                <span class="left">
+                    @&copy; 2014 SendIT
+                </span>
+                <span class="right">
+                    <a href="terms-and-condition.html" class="text-white">Terms and Condition</a>
+                    &nbsp;&nbsp;
+                    <a href="privacy-policy.html" class="text-white">Privacy Policy</a>
+                </span>
+                <br>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
