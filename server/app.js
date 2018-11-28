@@ -1,10 +1,11 @@
-// const express = require('express');
+
 import express from 'express';
 
 import morgan from 'morgan';
 
 import bodyParser from 'body-parser';
 
+// data+time formating 
 // import routes
 import parcelRoutes from './v1/routes/parcels';
 import userRoutes from './v1/routes/users';
@@ -30,11 +31,24 @@ app.use((req, res, next) => {
     next();
 });
 
- // Routes which should handle request
+
+// swagger
+import {SwaggerUIBundle, SwaggerUIStandalonePreset} from 'swagger-ui-dist';
+export const swaggerUIBundle = SwaggerUIBundle;
+export const swaggerUIStandalonePreset = SwaggerUIStandalonePreset;
+
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './../swagger';
+ 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
+// swagger.setAppHandler(app);
+
 app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/locations', locationRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 app.use(ErrorController.NotFound);
 app.use(ErrorController.InternalServerError);
