@@ -15,10 +15,6 @@ const create = (req, response, next) =>{
                 message: "Login first to perform this action."
             });
         } else {
-<<<<<<< HEAD
-            response.send({
-                message: `Locations: "${location.title}" has been registered successfully!`
-=======
             // if logged in
             const {error} = validateLocation(req.body);
             if(error){
@@ -46,7 +42,6 @@ const create = (req, response, next) =>{
                         message: `Locations: "${location.title}" has been registered successfully!`
                     });
                 }
->>>>>>> 2cafbb4ac4f1c44aa275cf236c827eadad078830
             });
         }
     });
