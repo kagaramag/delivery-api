@@ -24,13 +24,14 @@ export default {
 
 const usersTable = `CREATE TABLE IF NOT EXISTS
       users(
-        id SERIAL PRIMARY KEY,
-        email CHARACTER(128) UNIQUE NOT NULL,
-        name CHARACTER(128) NOT NULL,
-        role CHARACTER(128) NOT NULL,
-        password CHARACTER(128) NOT NULL,
-        created_date TIMESTAMP,
-        modified_date TIMESTAMP
+        id SERIAL NOT NULL PRIMARY KEY,
+        name character VARCHAR(255) NOT NULL,
+        email character VARCHAR(255) UNIQUE NOT NULL,
+        password character VARCHAR(255) NOT NULL,
+        state character VARCHAR(255) NOT NULL,
+        created_time timestamp DEFAULT CURRENT_TIMESTAMP,
+        updated_time timestamp DEFAULT CURRENT_TIMESTAMP,
+        role numeric(11,0)
       )`;
 (() => {
   pool.query(usersTable)
