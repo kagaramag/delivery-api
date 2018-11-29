@@ -40,5 +40,3 @@ const usersTable = `CREATE TABLE IF NOT EXISTS
       console.log(err);
     });
 })();
-
-})();
