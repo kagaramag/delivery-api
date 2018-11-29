@@ -2,11 +2,20 @@ sudo: false
 language: node_js
 node_js:
   - "stable"
+addons:
+  postgresql: "9.6"
+services:
+  - postgresql
+cache:
+  directories:
+    - "node_modules"
+before_script:
+   - psql -c 'create database sendeit;' -U postgres
+
+before_install:
+  - npm i -g npm@6.4.1
+
 script: npm test
 after_success:
 - npm run coveralls
 - npm run report-coverage
-
-notication:
-- email:false
-
