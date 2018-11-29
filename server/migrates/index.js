@@ -23,7 +23,7 @@ export default {
 };
 
 const usersTable = `CREATE TABLE IF NOT EXISTS
-      members(
+      users(
         id UUID PRIMARY KEY,
         email VARCHAR(128) UNIQUE NOT NULL,
         name VARCHAR(128) NOT NULL,
