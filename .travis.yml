@@ -10,7 +10,7 @@ cache:
   directories:
     - "node_modules"
 before_script:
-   - psql -c 'create database sendeit;' -U postgres
+   - psql -c 'create database sendeit;' -U gilles
 
 before_install:
   - npm i -g npm@6.4.1
