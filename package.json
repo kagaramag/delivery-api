@@ -4,10 +4,10 @@
   "description": "RESTful API for Parcels Develivery APP",
   "main": "server.js",
   "scripts": {
+    "migrate": "node --require babel-register ./server/migrates/index.js --exit",
     "start": "nodemon --exec babel-node ./server/server.js ",
     "test": "nyc --reporter=text --reporter=lcov mocha --timeout 10000 --require babel-register ./server/test/ --exit ",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "migrate": "node --require babel-register ./server/migrates/index.js --exit",
     "lint": "eslint",
     "pg": "nodemon server.js"
   },
