@@ -36,9 +36,9 @@ const createNewUser = (req, response, next) => {
         const values = [user.name, user.email, user.password, user.state, user.role];
         // callback
         pool.query(text, values, (err, res) => {
-            if (err) {
+            if (err.routine === '_bt_check_unique') {
                 response.status(409).send({
-                    message: err.stack
+                    message:`Whoochs, Account with ${user.email} already exist.`
                 });
             } else {
                 response.status(200).send({
@@ -59,8 +59,9 @@ const createNewUser = (req, response, next) => {
 const loginUser = (req, res, next) => {
     const email = validator.emailIsValid(req.body.email,res);
     const password = validator.passwordIsValid(req.body.password);
-    if(!email || !password){       
-        res.send({
+    if(!email || !password){    
+        // server status 422 is used for Unprocessable Entity   
+        res.status(422).send({
             message: "Invalid inputs"
         })
     }else{
@@ -72,10 +73,13 @@ const loginUser = (req, res, next) => {
             const { userId } = response.rows[0];
             const verify = bcrypt.compare(password, response.rows[0].password)
             if(verify){
-            const token = jwt.sign({ user: userId }, process.env.SECRET);
-            return res.status(200).send({token});
-            } 
-            return res.status(200).send({user: response.rows[0]});
+                const token = jwt.sign({ user: userId }, process.env.SECRET);
+                return res.status(200).send({token});
+            }else{
+                return res.status(401).send({
+                    message:"Sorry, your password is incorrect."
+                })
+            }
         }).catch(err =>{
             console.log(err.stack)
         }); 

@@ -30,7 +30,14 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
+// app.use('/', (req, res, next) => {
+//     next();
+//     console.log(" execture after ");
+// })
+// app.use('/', (req, res, next) => {
+//     console.log(" execture before ");
+//     next();
+// })
 
 // swagger
 import {SwaggerUIBundle, SwaggerUIStandalonePreset} from 'swagger-ui-dist';
