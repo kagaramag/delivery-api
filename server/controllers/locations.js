@@ -9,39 +9,32 @@ require('dotenv').config();
 
 // cancel parcel order
 const create = (req, response, next) =>{   
-    jwt.verify(req.token, process.env.SECRET, function(err, data) {
+    if(!authVerify.isTokenExist(req.token)) return res.send({message: "Sorry, Error occured while processing your token"})
+    // if logged in
+    const {error} = validateLocation(req.body);
+    if(error){
+        response.status(400).send(error.details[0].message);
+        return;
+    }
+    const location = {
+        id_parcel: req.body.id_parcel,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        message: req.body.message,
+        created_time:moment().format("YYYY-MM-DD HH:mm")
+    }
+    const text = 'INSERT INTO locations( id_parcel, latitude, longitude, message,created_time) VALUES($1, $2, $3, $4, $5) RETURNING *'
+    const values = [location.id_parcel, location.latitude, location.longitude, location.message, location.created_time];
+
+    // // callback
+    pool.query(text, values, (err, res) => {
         if (err) {
-            res.send({
-                message: "Login first to perform this action."
+            response.send({
+                message: err.stack
             });
         } else {
-            // if logged in
-            const {error} = validateLocation(req.body);
-            if(error){
-                response.status(400).send(error.details[0].message);
-                return;
-            }
-            const location = {
-                id_parcel: req.body.id_parcel,
-                latitude: req.body.latitude,
-                longitude: req.body.longitude,
-                message: req.body.message,
-                created_time:moment().format("YYYY-MM-DD HH:mm")
-            }
-            const text = 'INSERT INTO locations( id_parcel, latitude, longitude, message,created_time) VALUES($1, $2, $3, $4, $5) RETURNING *'
-            const values = [location.id_parcel, location.latitude, location.longitude, location.message, location.created_time];
-
-            // // callback
-            pool.query(text, values, (err, res) => {
-                if (err) {
-                    response.send({
-                        message: err.stack
-                    });
-                } else {
-                    response.send({
-                        message: `Locations: "${location.title}" has been registered successfully!`
-                    });
-                }
+            response.send({
+                message: `Locations: "${location.title}" has been registered successfully!`
             });
         }
     });
