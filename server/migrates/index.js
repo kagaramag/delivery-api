@@ -25,10 +25,10 @@ export default {
 const usersTable = `CREATE TABLE IF NOT EXISTS
       users(
         id SERIAL NOT NULL PRIMARY KEY,
-        name character VARCHAR(255) NOT NULL,
-        email character VARCHAR(255) UNIQUE NOT NULL,
-        password character VARCHAR(255) NOT NULL,
-        state character VARCHAR(255) NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        state VARCHAR(255) NOT NULL,
         created_time timestamp DEFAULT CURRENT_TIMESTAMP,
         updated_time timestamp DEFAULT CURRENT_TIMESTAMP,
         role numeric(11,0)
@@ -45,12 +45,12 @@ const usersTable = `CREATE TABLE IF NOT EXISTS
 const parcelsTable = `CREATE TABLE IF NOT EXISTS
       parcels(
         id SERIAL PRIMARY KEY,
-        title CHARACTER(128) UNIQUE NOT NULL,
-        description CHARACTER(128) NOT NULL,
-        weight CHARACTER(128) NOT NULL,
-        state CHARACTER(255) NOT NULL,
-        pickup CHARACTER(128) NOT NULL,
-        dropoff CHARACTER(128) NOT NULL,
+        title 128) UNIQUE NOT NULL,
+        description 128) NOT NULL,
+        weight 128) NOT NULL,
+        state 255) NOT NULL,
+        pickup 128) NOT NULL,
+        dropoff 128) NOT NULL,
         distance INTEGER NOT NULL,
         id_client INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
         role INTEGER NOT NULL,
