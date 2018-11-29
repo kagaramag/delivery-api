@@ -2,11 +2,11 @@ const { Pool, Client } = require('pg')
 require('dotenv').config();
 
 const pool = new Pool({
-  user:process.env.USER_DB,
-  host: 'localhost',
-  database: process.env.DATABASE || sendit,
-  password:process.env.PASSWORD_DB,
-  port: 5432
+  user:process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password:process.env.PG_PASSWORD,
+  port: process.env.PG_PORT
 });
 
 export default pool;

@@ -7,7 +7,7 @@ addons:
 env:
   global:
     - NODE_ENV=development
-    - SECRETKEY=d2Krb9h8pB6N1VNmC6hEGXs93KIrUtuY
+    - SECRET=d2Krb9h8pB6N1VNmC6hEGXs93KIrUtuY
     - PG_HOST=localhost
     - PG_URL=postgresql://gilles:123123@localhost/sendit
     - PG_USER=gilles
