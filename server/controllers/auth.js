@@ -36,7 +36,7 @@ const createNewUser = (req, response, next) => {
         const values = [user.name, user.email, user.password, user.state, user.role];
         // callback
         pool.query(text, values, (err, res) => {
-            if (err.routine === '_bt_check_unique') {
+            if (err) {
                 response.status(409).send({
                     message:`Whoochs, Account with ${user.email} already exist.`
                 });
