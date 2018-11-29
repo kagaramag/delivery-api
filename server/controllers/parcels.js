@@ -125,8 +125,6 @@ const cancelOne = (req, res, next) => {
 }
 // cancel parcel order
 const create = (req, response, next) =>{  
-    console.log("jdjkdk");
-    
     const {error} = validateParcel(req.body);
 
     if(error){
@@ -143,21 +141,21 @@ const create = (req, response, next) =>{
         dropoff: req.body.dropoff,
         distance: req.body.distance
     }
-    console.log("213232");
     jwt.verify(req.token, process.env.SECRET, function(err, data) {
         if (err) {
             res.send({
                 message: "Login first to perform this action."
             });
-        } else { 
-            console.log(parcel);      
+        } else {     
             const text = 'INSERT INTO parcels(title, description, weight, state, pickup, dropoff, distance, id_client) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
             const values = [parcel.title, parcel.description, parcel.weight, parcel.state, parcel.pickup,  parcel.dropoff,  parcel.distance, parcel.id_client];
             
             // promise
             pool.query(text, values)
             .then(res => {
-                response.send(res.rows[0])
+                response.send({
+                    message:"Parcel created"
+                })
             })
             .catch(e => console.error(e.stack)); 
         }
@@ -210,7 +208,7 @@ const changeStatus = (req, res, next) => {
             // if you are auth 
             const id = parseInt(req.params.id); 
             // check the status
-            pool.query(`SELECT state from parcels  where id = $1`, [id]).then(response =>{
+            pool.query(`SELECT state from parcels  where id = $1`, [id]).then(response => {
                 const state = response.rows[0].state.trim();
                 // if parcel exist and has 'created' as state 
                 if(state.length == 7){ 

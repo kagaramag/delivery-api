@@ -59,7 +59,7 @@ const createNewUser = (req, response, next) => {
 const loginUser = (req, res, next) => {
     const email = validator.emailIsValid(req.body.email,res);
     const password = validator.passwordIsValid(req.body.password);
-    if(!email && !password){       
+    if(!email || !password){       
         res.send({
             message: "Invalid inputs"
         })
@@ -68,6 +68,7 @@ const loginUser = (req, res, next) => {
           
             if(!response.rows) return res.status(401).send({message:'not found'});
             if(!response.rows[0]) return res.status(401).send({message:'not found'});
+            
             const { userId } = response.rows[0];
             const verify = bcrypt.compare(password, response.rows[0].password)
             if(verify){
