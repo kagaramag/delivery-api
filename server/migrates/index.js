@@ -45,18 +45,17 @@ const usersTable = `CREATE TABLE IF NOT EXISTS
 const parcelsTable = `CREATE TABLE IF NOT EXISTS
       parcels(
         id SERIAL PRIMARY KEY,
-        title 128) UNIQUE NOT NULL,
-        description 128) NOT NULL,
-        weight 128) NOT NULL,
-        state 255) NOT NULL,
-        pickup 128) NOT NULL,
-        dropoff 128) NOT NULL,
-        distance INTEGER NOT NULL,
-        id_client INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-        role INTEGER NOT NULL,
-        is_admin BOOLEAN NOT NULL DEFAULT FALSE,
-        created_date TIMESTAMP,
-        modified_date TIMESTAMP
+        title VARCHAR(128) NOT NULL,
+        description VARCHAR(128) NOT NULL,
+        weight NUMERIC(128) NOT NULL,
+        state VARCHAR(255) NOT NULL,
+        pickup VARCHAR(128) NOT NULL,
+        dropoff VARCHAR(128) NOT NULL,
+        distance NUMERIC(16) NOT NULL,
+        id_client NUMERIC(16) NOT NULL,
+        is_admin BOOLEAN NOT NULL DEFAULT false,
+        created_time timestamp DEFAULT CURRENT_TIMESTAMP,
+        updated_time timestamp DEFAULT CURRENT_TIMESTAMP
       )`;
 (() => {
   pool.query(parcelsTable)
@@ -66,3 +65,24 @@ const parcelsTable = `CREATE TABLE IF NOT EXISTS
       console.log(err);
     });
 })();
+
+
+const parcelsTable = `CREATE TABLE IF NOT EXISTS
+      locations(
+        id SERIAL NOT NULL PRIMARY KEY,
+        longitude VARCHAR(255) NOT NULL,
+        latitude VARCHAR(255) NOT NULL,
+        id_parcel INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+        message VARCHAR(600),  
+        created_date TIMESTAMP
+      )`;
+(() => {
+  pool.query(parcelsTable)
+    .then(() => {
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
+
+

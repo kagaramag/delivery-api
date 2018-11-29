@@ -17,7 +17,7 @@ const findAll = (req, res) =>{
     if(!authVerify.isTokenExist(req.token)) return res.send({message: "Sorry, Error occured while processing your token"})
     pool.query('SELECT * from parcels').then(response =>{
         res.status(200).json({
-            parcels:response.rows[0]
+            parcels:response.rows
         });
     }).catch(err =>{
         console.log(err)
