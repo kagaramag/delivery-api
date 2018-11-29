@@ -59,7 +59,6 @@ const createNewUser = (req, response, next) => {
 const loginUser = (req, res, next) => {
     const email = validator.emailIsValid(req.body.email,res);
     const password = validator.passwordIsValid(req.body.password);
-    console.log(req.body.password);
     if(!email || !password){    
         // server status 422 is used for Unprocessable Entity   
         res.status(422).send({

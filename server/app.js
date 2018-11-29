@@ -30,14 +30,6 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-// app.use('/', (req, res, next) => {
-//     next();
-//     console.log(" execture after ");
-// })
-// app.use('/', (req, res, next) => {
-//     console.log(" execture before ");
-//     next();
-// })
 
 // swagger
 import {SwaggerUIBundle, SwaggerUIStandalonePreset} from 'swagger-ui-dist';
@@ -49,10 +41,11 @@ import swaggerDocument from './../swagger';
  
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
-
-
-app.use('/api/v1/parcels', parcelRoutes);
+app.get("/", (req,res) => {
+    res.send({
+        message:"Welcome to the Parcels Delivery APP API."
+    })
+})
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);
 app.use('/api/v1/auth', authRoutes);
