@@ -1,66 +1,44 @@
-import dotenv from "dotenv";
-import { Pool } from "pg";
-import dbConfig from "../database/database";
+/* Code modified from a file obtained from https://github.com/olawalejarvis/reflection_app_server */
+import { Pool } from 'pg';
+import dotenv from 'dotenv';
+
+import pool from './../db/config';
+
 dotenv.config();
-const env = process.env.NODE_ENV || "development";
 
-const query = (text, params) => {
-  const pool = new Pool({
-    connectionString: dbConfig[env]
-  });
+const env = process.env.NODE_ENV || 'development';
+function query(text, params) {
   return new Promise((resolve, reject) => {
-    pool
-      .query(text, params)
-      .then(response => {
-        const { rows } = response;
-        resolve(rows);
-        pool.end();
+    pool.query(text, params)
+      .then((res) => {
+        resolve(res);
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err);
-        pool.end();
       });
   });
-};
-const findById = (table, id) => {
-  const pool = new Pool({
-    connectionString: dbConfig[env]
-  });
-  const queryText = `
-      SELECT *  FROM ${table} WHERE id = $1 LIMIT 1
-    `;
-  const values = [id];
-  return new Promise((resolve, reject) => {
-    pool
-      .query(queryText, values)
-      .then(response => {
-        const { rows } = response;
-        resolve(rows[0]);
-        pool.end();
-      })
-      .catch(err => {
-        reject(err);
-        pool.end();
-      });
-  });
+}
+export default {
+  query,
 };
 
-const createTable = commandDb => {
-  const pool = new Pool({
-    connectionString: dbConfig[env]
-  });
-  return new Promise((resolve, reject) => {
-    pool
-      .query(commandDb)
-      .then(response => {
-        resolve(response);
-        pool.end();
-      })
-      .catch(err => {
-        reject(err);
-        pool.end();
-      });
-  });
-};
+const usersTable = `CREATE TABLE IF NOT EXISTS
+      members(
+        id UUID PRIMARY KEY,
+        email VARCHAR(128) UNIQUE NOT NULL,
+        name VARCHAR(128) NOT NULL,
+        role VARCHAR(128) NOT NULL,
+        password VARCHAR(128) NOT NULL,
+        created_date TIMESTAMP,
+        modified_date TIMESTAMP
+      )`;
+(() => {
+  pool.query(usersTable)
+    .then(() => {
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})();
 
-export default { query, createTable, findById };
+})();
