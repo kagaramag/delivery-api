@@ -19,7 +19,7 @@ const findAll = (req, res, next) =>{
       } else {          
         pool.query('SELECT * from parcels').then(response =>{
             res.status(200).json({
-                parcels:"rest"
+                parcels:response.rows[0]
             });
         }).catch(err =>{
             console.log(err)
