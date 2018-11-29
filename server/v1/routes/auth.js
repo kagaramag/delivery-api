@@ -8,7 +8,6 @@ const router = express.Router();
 import AuthController from './../../controllers/auth';
 
 
-
 //POST signup
 router.post('/signup', AuthController.createNewUser);
 

@@ -43,7 +43,7 @@ import swaggerDocument from './../swagger';
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-// swagger.setAppHandler(app);
+
 
 app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);

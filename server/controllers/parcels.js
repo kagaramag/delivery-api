@@ -30,19 +30,26 @@ const findAll = (req, res, next) =>{
 // get one order
 const findOne = (req, res, next) =>{
     const id = parseInt(req.params.id); 
+    
+    jwt.verify(req.token, process.env.SECRET, function(err, data) {
+        if (err) {
+          res.sendStatus(403);
+        }else{  
 
-    pool.query(`SELECT * from parcels  where id = ${id}`).then(response =>{
-        if(response.rows[0]){
-            res.status(200).json({
-                parcel: response.rows[0]
-            });
-        }else{
-            res.json({
-                message: `Whoochs, Parcel with ${id} doesn't exist`
-            });
-        }
-    }).catch(err =>{
-        console.log(err)
+            pool.query(`SELECT * from parcels  where id = ${id}`).then(response =>{
+                if(response.rows[0]){
+                    res.status(200).json({
+                        parcel: response.rows[0]
+                    });
+                }else{
+                    res.json({
+                        message: `Whoochs, Parcel with ${id} doesn't exist`
+                    });
+                }
+            }).catch(err =>{
+                res.json({message:err})
+            });   
+        } 
     });    
 };
 // get location by parcels
@@ -118,33 +125,35 @@ const cancelOne = (req, res, next) => {
 }
 // cancel parcel order
 const create = (req, response, next) =>{  
+    console.log("jdjkdk");
     
     const {error} = validateParcel(req.body);
 
     if(error){
         response.status(400).send(error.details[0].message);
         return;
+    }   
+    const parcel = {
+        title: req.body.title,
+        description: req.body.description,
+        weight: req.body.weight,
+        state: req.body.state,
+        id_client: req.body.id_client,
+        pickup: req.body.pickup,
+        dropoff: req.body.dropoff,
+        distance: req.body.distance
     }
+    console.log("213232");
     jwt.verify(req.token, process.env.SECRET, function(err, data) {
         if (err) {
             res.send({
                 message: "Login first to perform this action."
             });
-        } else {          
-            const parcel = {
-                title: req.body.title,
-                description: req.body.description,
-                weight: req.body.weight,
-                state: req.body.state,
-                id_client: req.body.id_client,
-                pickup: req.body.pickup,
-                dropoff: req.body.dropoff,
-                distance: req.body.distance
-            }
-        
-            const text = 'INSERT INTO parcels(title, description, weight, state, pickup, dropoff, distance) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *'
-            const values = [parcel.title, parcel.description, parcel.weight, parcel.state, parcel.pickup,  parcel.dropoff,  parcel.distance];
-        
+        } else { 
+            console.log(parcel);      
+            const text = 'INSERT INTO parcels(title, description, weight, state, pickup, dropoff, distance, id_client) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *'
+            const values = [parcel.title, parcel.description, parcel.weight, parcel.state, parcel.pickup,  parcel.dropoff,  parcel.distance, parcel.id_client];
+            
             // promise
             pool.query(text, values)
             .then(res => {
@@ -158,45 +167,79 @@ const create = (req, response, next) =>{
 
 // create destination of a parcel
 const destination = (req, res, next) =>{
+    // get id
     const id = req.params.id;
+    // varidate...
     const {error} = validateLocation(req.body);    
     if(error){
         res.status(400).send(error.details[0].message);
         return;
     }   
-    const location = {
-        id: locations.length + 1,
-        latitude: req.body.latitude,
-        longitude: req.body.longitude,
-        id_parcel: id,
-        message: req.body.message,
-        created_time: req.body.created_time
-    };     
     
-    locations.push(location);
-    res.send(location);
-
+    jwt.verify(req.token, process.env.SECRET, function(err, data) {
+        if (err) {
+            res.send({
+                message: "Login first to perform this action."
+            });
+        } else { 
+            const location = {
+                id: locations.length + 1,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude,
+                id_parcel: id,
+                message: req.body.message,
+                created_time: req.body.created_time
+            };     
+            
+            locations.push(location);
+            res.send(location);
+        }
+    });
 };
 
 
 //change status
 const changeStatus = (req, res, next) => {
-    // look up parcel
-
-    const parcel = parcels.find(p => p.id  === parseInt(req.params.id));
-    if(!parcel) res.status(404).send("Parcel order with given id was not found");
-
-    const { error } = validateParcel(parcel);
-
-    if(error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
-    // update parcel
-    parcel.state = 'in_transit';
-    // return the updated parcel
-    res.send(parcel);
-    req.setTimeout(500);
+    // check auth
+    jwt.verify(req.token, process.env.SECRET, function(err, data) {
+        if (err) {
+            res.send({
+                message: "Login first to perform this action."
+            });
+        } else {   
+            // if you are auth 
+            const id = parseInt(req.params.id); 
+            // check the status
+            pool.query(`SELECT state from parcels  where id = $1`, [id]).then(response =>{
+                const state = response.rows[0].state.trim();
+                // if parcel exist and has 'created' as state 
+                if(state.length == 7){ 
+                    // proceed to updating parcel order to canceled       
+                    pool.query(`UPDATE parcels SET state = 'in_transit'  where id = ${id}`).then(response =>{
+                        res.status(200).json({
+                            message:"Parcel order cancelled successully"
+                        });
+                    }).catch(err =>{
+                        res.json({
+                            error: err.stack
+                        });
+                    }); 
+                }else if(state.length == 8){
+                    res.json({
+                        message: `Whoochs, Parcel with ${id} has been already canceled`
+                    });
+                }else{
+                    res.json({
+                        message: `Whoochs, Parcel with ${id} doesn't exist`
+                    });
+                }
+            }).catch(err =>{
+                res.json({
+                    error: err
+                });
+            });   
+        }
+    });
 }
 
 
@@ -204,7 +247,7 @@ const changeStatus = (req, res, next) => {
 // validating parcel
 function validateParcel(parcel){
     const schema = {
-        title: Joi.string().min(3).max(120).required(),
+        title: Joi.string().required(),
         description: Joi.string().min(10).max(300),
         weight: Joi.number(),
         id_client: Joi.number(),
@@ -217,7 +260,7 @@ function validateParcel(parcel){
 }
 
 // verify location
-function validateLocation(parcel){
+function validateLocation(location){
     const schema = {
         id: Joi.number().required(),
         latitude: Joi.string(),
@@ -226,7 +269,7 @@ function validateLocation(parcel){
         message: Joi.string().min(2).max(300),
         created_time: Joi.date()
     };
-    return Joi.validate(parcel, schema);
+    return Joi.validate(location, schema);
 }
 
 export default {findAll, findOne, create, cancelOne, destination, changeStatus, findLocationByParcels}

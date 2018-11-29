@@ -19,8 +19,7 @@ const saltRounds = 10;
 const bcrypt = require('bcrypt');
 
 // create new user
-const createNewUser = (req, response, next) => {
-    
+const createNewUser = (req, response, next) => {    
     
     const password = req.body.password;
     const hash = bcrypt.hashSync(password, saltRounds);
@@ -29,19 +28,20 @@ const createNewUser = (req, response, next) => {
         const user = {
             name: req.body.name,
             email: req.body.email,
+            role: req.body.role,
             password:hash,
             state:'active'
         };
-        const text = 'INSERT INTO users( name, email, password, state) VALUES($1, $2, $3, $4) RETURNING *'
-        const values = [user.name, user.email, user.password, user.state];
+        const text = 'INSERT INTO users( name, email, password, state, role) VALUES($1, $2, $3, $4, $5) RETURNING *'
+        const values = [user.name, user.email, user.password, user.state, user.role];
         // callback
         pool.query(text, values, (err, res) => {
             if (err) {
-                response.send({
+                response.status(409).send({
                     message: err.stack
                 });
             } else {
-                response.send({
+                response.status(200).send({
                     message: `Account with ${user.email} has been registered successfully!`
                 });
             }
@@ -76,7 +76,7 @@ const loginUser = (req, res, next) => {
             } 
             return res.status(200).send({user: response.rows[0]});
         }).catch(err =>{
-            console.log(err)
+            console.log(err.stack)
         }); 
     }
 }
