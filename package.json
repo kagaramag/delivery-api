@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "migrate": "node --require babel-register ./server/migrates/index.js --exit",
-    "start": "nodemon --exec babel-node ./server/server.js ",
+    "start": "babel-node ./server/server.js ",
+    "dev": "nodemon --exec babel-node ./server/server.js ",
     "test": "nyc --reporter=text --reporter=lcov mocha --timeout 10000 --require babel-register ./server/test/ --exit ",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint",
@@ -19,6 +20,10 @@
   "author": "Gilles Kagarama",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "bcrypt": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^6.1.0",
@@ -31,10 +36,6 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "cover": "^0.2.9",

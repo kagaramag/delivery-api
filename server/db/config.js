@@ -27,6 +27,6 @@ if(process.env.NODE_ENV === 'production'){
   };
 
 }
-console.log(config);
+// console.log(config);
 const pool = new Pool(config);
 export default pool;
