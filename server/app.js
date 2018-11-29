@@ -46,6 +46,7 @@ app.get("/", (req,res) => {
         message:"Welcome to the Parcels Delivery APP API."
     })
 })
+app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);
 app.use('/api/v1/auth', authRoutes);
