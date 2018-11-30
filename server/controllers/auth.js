@@ -10,7 +10,7 @@ import validator from './../validation/index';
 
 // manage auth
 import jwt from 'jsonwebtoken';
-import Auth from './../db/jwt';
+import Auth from '../db/jwt';
 import validation from '../validation';
 // IMPORT SECRET DATA
 require('dotenv').config();
@@ -86,6 +86,23 @@ const loginUser = (req, res, next) => {
     }
 }
 
+// // login user
+// const deleteUser = (req, res, next) => {
+//     // const email = parseInt(req.body.email);
+//     // console.log(email);
+//     // if(!email === 'test@test.com') return res.status(401).send({message:email+"Action not allowed"})
+//     pool.query(`DELETE FROM users where email = 'test@test.com'`).then(response =>{    
+    
+//        res.status(200).send({
+//             message:"User deleted"
+//         })
+//     }).catch(err =>{                
+//         res.status(401).send({
+//             message:"Sorry can't delete this user!"
+//         })
+//     }); 
+// }
+
 // // validating user
 // function validateUser(user){
 //     // defining schema
@@ -97,4 +114,4 @@ const loginUser = (req, res, next) => {
 // }
 
 
-export default { createNewUser, loginUser }
+export default { createNewUser, loginUser}

@@ -8,7 +8,7 @@ const router = express.Router();
 import ParcelsController from './../../controllers/parcels';
 
 import jwt from 'jsonwebtoken';
-import Auth from './../../db/jwt';
+import Auth from '../../db/jwt';
 
 router.get('/', Auth, ParcelsController.findAll);
 // cancel order
@@ -19,6 +19,9 @@ router.get('/:id',  Auth,  ParcelsController.findOne);
 router.post('/', Auth, ParcelsController.create);
 // // Change package status
 router.put('/:id/status',  Auth,  ParcelsController.changeStatus);
+
+// change destination
+router.put('/:id/destination',  Auth,  ParcelsController.changeDropOff);
 
 // get all location by specific parcel
 router.get('/:id/locations', Auth, ParcelsController.findLocationByParcels);

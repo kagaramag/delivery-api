@@ -29,6 +29,7 @@ const usersTable = `CREATE TABLE IF NOT EXISTS
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         state VARCHAR(255) NOT NULL,
+        is_admin BOOLEAN NOT NULL DEFAULT false,
         created_time timestamp DEFAULT CURRENT_TIMESTAMP,
         updated_time timestamp DEFAULT CURRENT_TIMESTAMP,
         role numeric(11,0)
@@ -53,7 +54,6 @@ const parcelsTable = `CREATE TABLE IF NOT EXISTS
         dropoff VARCHAR(128) NOT NULL,
         distance NUMERIC(16) NOT NULL,
         id_client NUMERIC(16) NOT NULL,
-        is_admin BOOLEAN NOT NULL DEFAULT false,
         created_time timestamp DEFAULT CURRENT_TIMESTAMP,
         updated_time timestamp DEFAULT CURRENT_TIMESTAMP
       )`;

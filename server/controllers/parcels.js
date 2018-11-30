@@ -24,7 +24,7 @@ const findAll = (req, res) =>{
     });
 };
 // get one order
-const findOne = (req, res, next) =>{
+const findOne = (req, res) =>{
     const id = parseInt(req.params.id); 
     
     if(!authVerify.isTokenExist(req.token)) return res.send({message: "Sorry, Error occured while processing your token"}) 
@@ -44,7 +44,7 @@ const findOne = (req, res, next) =>{
     });    
 };
 // get location by parcels
-const findLocationByParcels = (req, res, next) =>{
+const findLocationByParcels = (req, res) =>{
     // check auth
     if(!authVerify.isTokenExist(req.token)) return res.send({message: "Sorry, Error occured while processing your token"})
     const id = parseInt(req.params.id); 
@@ -65,7 +65,7 @@ const findLocationByParcels = (req, res, next) =>{
 };
 
 //cancel one order
-const cancelOne = (req, res, next) => {
+const cancelOne = (req, res) => {
     // check auth
     if(!authVerify.isTokenExist(req.token)) return res.send({message: "Sorry, Error occured while processing your token"})  
     // if you are auth 
@@ -101,7 +101,7 @@ const cancelOne = (req, res, next) => {
     });  
 }
 // cancel parcel order
-const create = (req, response, next) =>{  
+const create = (req, response) =>{  
     const {error} = validateParcel(req.body);
 
     if(error){
@@ -135,7 +135,7 @@ const create = (req, response, next) =>{
 };
 
 // create destination of a parcel
-const destination = (req, res, next) =>{
+const destination = (req, res) =>{
     // get id
     const id = req.params.id;
     // varidate...
@@ -162,47 +162,96 @@ const destination = (req, res, next) =>{
 
 
 //change status
-const changeStatus = (req, res, next) => {
+const changeStatus = (req, res) => {
     // check auth
-    jwt.verify(req.token, process.env.SECRET, function(err, data) {
-        if (err) {
-            res.send({
-                message: "Login first to perform this action."
-            });
-        } else {   
-            // if you are auth 
-            const id = parseInt(req.params.id); 
-            // check the status
-            pool.query(`SELECT state from parcels  where id = $1`, [id]).then(response => {
-                const state = response.rows[0].state.trim();
-                // if parcel exist and has 'created' as state 
-                if(state.length == 7){ 
-                    // proceed to updating parcel order to canceled       
-                    pool.query(`UPDATE parcels SET state = 'in_transit'  where id = ${id}`).then(response =>{
-                        res.status(200).json({
-                            message:"Parcel order cancelled successully"
-                        });
-                    }).catch(err =>{
-                        res.json({
-                            error: err.stack
-                        });
-                    }); 
-                }else if(state.length == 8){
-                    res.json({
-                        message: `Whoochs, Parcel with ${id} has been already canceled`
-                    });
-                }else{
-                    res.json({
-                        message: `Whoochs, Parcel with ${id} doesn't exist`
-                    });
-                }
+    if(!authVerify.isTokenExist(req.token)) return res.send({message: "Sorry, Error occured while processing your token"})
+    // if you are auth 
+    const id = parseInt(req.params.id); 
+    // check the status
+    pool.query(`SELECT state from parcels  where id = $1`, [id]).then(response => {
+        const state = response.rows[0].state.trim();
+        // if parcel exist and has 'created' as state 
+        if(state.length == 7){ 
+            // proceed to updating parcel order to canceled       
+            pool.query(`UPDATE parcels SET state = 'in_transit'  where id = ${id}`).then(response =>{
+                res.status(200).json({
+                    message:"Parcel order cancelled successully"
+                });
             }).catch(err =>{
                 res.json({
-                    error: err
+                    error: err.stack
                 });
-            });   
+            }); 
+        }else if(state.length == 8){
+            res.json({
+                message: `Whoochs, Parcel with ${id} has been already canceled`
+            });
+        }else{
+            res.json({
+                message: `Whoochs, Parcel with ${id} doesn't exist`
+            });
         }
-    });
+    }).catch(err =>{
+        res.json({
+            error: err
+        });
+    }); 
+}
+
+
+//change status
+const changeDropOff = (req, res) => {
+    if(!authVerify.isTokenExist(req.token)) return res.send({message: "Sorry, Error occured while processing your token"});
+    res.send({
+        message:"Change dropoff"
+    })
+    // // if you are auth 
+    // const id = parseInt(req.params.id); 
+    // if (req.headers && req.headers.authorization) {
+    //     // var authorization = req.headers.authorization,
+    //     //     decoded;
+    //     // try {
+    //     //     decoded = jwt.verify(authorization, process.env.SECRET);
+    //     // } catch (e) {
+    //     //     return res.status(401).send('unauthorized');
+    //     // }
+    //     var userId = authorization.id;
+    //     console.log(userId);
+    //     // Fetch the user by id 
+    //     User.findOne({_id: userId}).then(function(user){
+    //         // Do something with the user
+    //         return res.send(200);
+    //     });
+    // }    
+    // // check the status
+    // pool.query(`SELECT state from parcels  where id = $1`, [id]).then(response => {
+    //     const state = response.rows[0].state.trim();
+    //     // if parcel exist and has 'created' as state 
+    //     if(state.length == 7){ 
+    //         // proceed to updating parcel order to canceled       
+    //         pool.query(`UPDATE parcels SET state = 'in_transit'  where id = ${id}`).then(response =>{
+    //             res.status(200).json({
+    //                 message:"Parcel order cancelled successully"
+    //             });
+    //         }).catch(err =>{
+    //             res.json({
+    //                 error: err.stack
+    //             });
+    //         }); 
+    //     }else if(state.length == 8){
+    //         res.json({
+    //             message: `Whoochs, Parcel with ${id} has been already canceled`
+    //         });
+    //     }else{
+    //         res.json({
+    //             message: `Whoochs, Parcel with ${id} doesn't exist`
+    //         });
+    //     }
+    // }).catch(err =>{
+    //     res.json({
+    //         error: err
+    //     });
+    // }); 
 }
 
 
@@ -235,4 +284,4 @@ function validateLocation(location){
     return Joi.validate(location, schema);
 }
 
-export default {findAll, findOne, create, cancelOne, destination, changeStatus, findLocationByParcels}
+export default {findAll, findOne, create, cancelOne, destination, changeStatus, findLocationByParcels, changeDropOff}

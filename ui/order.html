@@ -28,7 +28,7 @@
                 <div class="s4 m4 l1">
                         <ul class="list-inline left-align">
                             <li class="">
-                                <a href="#" class="xl-text hide-on-large" onclick="toggleSidebar();return false;">
+                                <a href="#" class="xl-text hide-on-large left" onclick="toggleSidebar();return false;">
                                     <span class="fas fa-bars m-margin"></span>
                                 </a>
                             </li>
@@ -42,8 +42,8 @@
                     <div class="s4 m1 l3 hide-on-small hide-on-medium">
                         <div class="right">
                             <ul class="list-inline mainmenu">
-                                <li><a href="/index.html">Home</a>
-                                <li><a href="/account.html" class="bold">
+                                <li><a href="./index.html">Home</a>
+                                <li><a href="./account.html" class="bold">
                                     <span class="fas fa-user-circle l-text"></span>
                                     Gilles Kagarama</a> </li>
                             </ul>
@@ -58,13 +58,14 @@
     <section>
         <div class="row">
             <div class="container">  
-                    <div class="s4 m4 l1">
-                        <ul class="sidebar">
-                            <li><a href="./dashboard.html"><span class="fas fa-cube"></span> Dashboard</a></li>
-                            <li><a href="#"><span class="fas fa-user"></span> Profile</a></li>
-                            <li><a href="#"><span class="fas fa-bell"></span> Notifications</a></li>
-                            <li><a href="#"><span class="fas fa-sign-out-alt"></span> Logout</a></li>
-                        </ul>
+                        <div class="s4 m4 l1">
+                            <ul class="sidebar">
+                                <li><a href="./create-order.html"><span class="fas fa-plus"></span> Create Orders</a></li>
+                                <li><a href="./account.html"><span class="fas fa-cube"></span> Parcel Orders</a></li>
+                                <li><a href="./profile.html"><span class="fas fa-user"></span> Profile</a></li>
+                                <li><a href="./notification.html"><span class="fas fa-bell"></span> Notifications</a></li>
+                                <li><a href="./logout.html"><span class="fas fa-sign-out-alt"></span> Logout</a></li>
+                            </ul>
                         </div>
                         <div class="s4 m4 l3">               
                                 <div class="row xl-v-margin">
@@ -77,33 +78,37 @@
                                         </div>
                                         <div class="s3 m3 l3 shadow-2 radius-3">
                                             <div class="m-h-padding">
-                                                <h2 class="xl-text" id="title"><div class="placeholder xl-v-padding"></div></h2>
-                                                <div id="description"><div class="placeholder xl-v-padding"></div></div>
+                                                <h2 class="xl-text">New mobile</h2>
+                                                <div> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime quo iste illum et voluptate nihil nulla ad asperiores </div>
                                             </div>
-                                            <div class="l-padding">
-                                                    <div class="l2">
-                                                        <div class="placeholder l-v-padding"></div>
-                                                    </div>
-                                                    <div class="l2">
-                                                        <div class="placeholder l-v-padding"></div>
-                                                    </div>
+                                            <div class="l-padding l-v-margin">
+                                                    <div class="l4">
+                                                        <a href="#" class="btn indigo text-white bold radius-6 m-text l-padding" onclick="confirm('Do you really want to cancel the order?');">Cancel Order</a>
+                                                        <a href="./change-location.html" class="btn jazzberry text-white bold radius-6 m-text l-padding">Change Location</a>
+                                                        </div>
                                                 <div class="clear"></div>
                                             </div>
                                             <div class="divider grey"></div>
                                             <div class="l-padding">
-                                                <div class="l2" id="pickup">
-                                                    <div class="placeholder l-v-padding"></div>
+                                                <div class="l2">
+                                                    <div class="l-v-padding">Pickup: KN 3 St 12</div>
                                                 </div>
-                                                <div class="l2" id="dropoff">
-                                                    <div class="placeholder l-v-padding"></div>
+                                                <div class="l2">
+                                                    <div class="l-v-padding right-align">dropoff: KG 54 Av 43</div>
                                                 </div>
                                                 <div class="clear"></div>
+                                            </div>
+                                            <div class="divider grey"></div>
+                                            <div class="l-padding">                                                
+                                                    <div> Created: Dec 1, 2018 </div>
+                                                <div class="clear"></div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="clear"></div>
                                     <br>
-                                    <div class="s4 m4 l4 shadow-2 radius-3">                                    
+                                    <div class="s4 m4 l4 shadow-2 radius-3 hide">                                    
                                         <div id="locations" class="row l-padding">
                                             <div class='oneparcel'>
                                                 <div class="s1 m1 l1 bold"># Created</div>
@@ -114,50 +119,50 @@
                                         </div>                                    
                                     </div>                                    
                                     <br>
-                    <table class="bordered left-align  shadow-2 radius-1">
-                        <tr>
-                            <th>#</th>
-                            <th>Location</th>
-                            <th>Status</th>
-                            <th> &nbsp; </th>
-                        </tr>
-                        <tr>
-                            <td class="center-align">1</td>
-                            <td>
-                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
-                                <span class="text-red">Created: Sept 4, 2018</span>
-                            </td> 
-                            <td class="center-align">Delivered</td>
-                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
-                        </tr>
-                        <tr>
-                            <td class="center-align">2</td>
-                            <td>
-                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
-                                <span class="text-red">Created: Sept 4, 2018</span>
-                            </td> 
-                            <td class="center-align">Delivered</td>
-                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
-                        </tr>
-                        <tr>
-                            <td class="center-align">3</td>
-                            <td>
-                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
-                                <span class="text-red">Created: Sept 4, 2018</span>
-                            </td> 
-                            <td class="center-align">Delivered</td>
-                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
-                        </tr>
-                        <tr>
-                            <td class="center-align">4</td>
-                            <td>
-                                <h6 class="nm l-text">4.4 Kg of Farine</h6>
-                                <span class="text-red">Created: Sept 4, 2018</span>
-                            </td> 
-                            <td class="center-align">Delivered</td>
-                            <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
-                        </tr>
-                    </table>                   
+                            <table class="bordered left-align  shadow-2 radius-1 hide">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th> &nbsp; </th>
+                                </tr>
+                                <tr>
+                                    <td class="center-align">1</td>
+                                    <td>
+                                        <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                        <span class="text-red">Created: Sept 4, 2018</span>
+                                    </td> 
+                                    <td class="center-align">Delivered</td>
+                                    <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                                </tr>
+                                <tr>
+                                    <td class="center-align">2</td>
+                                    <td>
+                                        <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                        <span class="text-red">Created: Sept 4, 2018</span>
+                                    </td> 
+                                    <td class="center-align">Delivered</td>
+                                    <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                                </tr>
+                                <tr>
+                                    <td class="center-align">3</td>
+                                    <td>
+                                        <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                        <span class="text-red">Created: Sept 4, 2018</span>
+                                    </td> 
+                                    <td class="center-align">Delivered</td>
+                                    <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                                </tr>
+                                <tr>
+                                    <td class="center-align">4</td>
+                                    <td>
+                                        <h6 class="nm l-text">4.4 Kg of Farine</h6>
+                                        <span class="text-red">Created: Sept 4, 2018</span>
+                                    </td> 
+                                    <td class="center-align">Delivered</td>
+                                    <td class="center-align"> <a href="order.html" class="btn indigo text-white radius-5">Details</a> </td>
+                                </tr>
+                            </table>                   
                     <div id="canvas" class="center"></div>
                 </div>
             </div>

@@ -13,6 +13,8 @@ router.post('/signup', AuthController.createNewUser);
 
 //POST login
 router.post('/login', AuthController.loginUser);
+// delete user
+// router.delete('/delete', Auth, AuthController.deleteUser);
 
 
 export default router;
