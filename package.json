@@ -4,7 +4,6 @@
   "description": "RESTful API for Parcels Develivery APP",
   "main": "server.js",
   "scripts": {
-    "migrate": "node --require babel-register ./server/migrates/index.js --exit",
     "start": "babel-node ./server/server.js ",
     "dev": "nodemon --exec babel-node ./server/server.js ",
     "test": "nyc --reporter=text --reporter=lcov mocha --timeout 10000 --require babel-register ./server/test/ --exit ",
