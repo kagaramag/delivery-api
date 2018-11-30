@@ -10,7 +10,7 @@ import validator from './../validation/index';
 
 // manage auth
 import jwt from 'jsonwebtoken';
-import Auth from './../db/jwt';
+import Auth from '../db/jwt';
 import validation from '../validation';
 // IMPORT SECRET DATA
 require('dotenv').config();
@@ -38,7 +38,7 @@ const createNewUser = (req, response, next) => {
         pool.query(text, values, (err, res) => {
             if (err) {
                 response.status(409).send({
-                    message: err.stack
+                    message:`Whoochs, Account with ${user.email} already exist.`
                 });
             } else {
                 response.status(200).send({
@@ -59,8 +59,9 @@ const createNewUser = (req, response, next) => {
 const loginUser = (req, res, next) => {
     const email = validator.emailIsValid(req.body.email,res);
     const password = validator.passwordIsValid(req.body.password);
-    if(!email || !password){       
-        res.send({
+    if(!email || !password){    
+        // server status 422 is used for Unprocessable Entity   
+        res.status(422).send({
             message: "Invalid inputs"
         })
     }else{
@@ -72,15 +73,35 @@ const loginUser = (req, res, next) => {
             const { userId } = response.rows[0];
             const verify = bcrypt.compare(password, response.rows[0].password)
             if(verify){
-            const token = jwt.sign({ user: userId }, process.env.SECRET);
-            return res.status(200).send({token});
-            } 
-            return res.status(200).send({user: response.rows[0]});
+                const token = jwt.sign({ user: userId }, process.env.SECRET);
+                return res.status(200).send({token});
+            }else{
+                return res.status(401).send({
+                    message:"Sorry, your password is incorrect."
+                })
+            }
         }).catch(err =>{
             console.log(err.stack)
         }); 
     }
 }
+
+// // login user
+// const deleteUser = (req, res, next) => {
+//     // const email = parseInt(req.body.email);
+//     // console.log(email);
+//     // if(!email === 'test@test.com') return res.status(401).send({message:email+"Action not allowed"})
+//     pool.query(`DELETE FROM users where email = 'test@test.com'`).then(response =>{    
+    
+//        res.status(200).send({
+//             message:"User deleted"
+//         })
+//     }).catch(err =>{                
+//         res.status(401).send({
+//             message:"Sorry can't delete this user!"
+//         })
+//     }); 
+// }
 
 // // validating user
 // function validateUser(user){
@@ -93,4 +114,4 @@ const loginUser = (req, res, next) => {
 // }
 
 
-export default { createNewUser, loginUser }
+export default { createNewUser, loginUser}

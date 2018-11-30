@@ -4,13 +4,25 @@ node_js:
   - "stable"
 addons:
   postgresql: "9.6"
+env:
+  global:
+    - NODE_ENV=development
+    - SECRET=d2Krb9h8pB6N1VNmC6hEGXs93KIrUtuY
+    - PG_HOST=localhost
+    - PG_URL=postgresql://gilles:123123@localhost/sendit
+    - PG_USER=gilles
+    - PG_DATABASE=sendit
+    - PG_PASSWORD=123123
+    - PG_PORT=5432  
 services:
   - postgresql
 cache:
   directories:
     - "node_modules"
 before_script:
-   - psql -c 'create database sendeit;' -U postgres
+  - psql -c 'create database sendit;' -U postgres
+  - psql -c "CREATE USER gilles WITH PASSWORD '123123';" -U postgres
+  - npm run migrate
 
 before_install:
   - npm i -g npm@6.4.1

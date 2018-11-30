@@ -31,7 +31,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
 // swagger
 import {SwaggerUIBundle, SwaggerUIStandalonePreset} from 'swagger-ui-dist';
 export const swaggerUIBundle = SwaggerUIBundle;
@@ -42,9 +41,11 @@ import swaggerDocument from './../swagger';
  
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
-
-
+app.get("/", (req,res) => {
+    res.send({
+        message:"Welcome to the Parcels Delivery APP API."
+    })
+})
 app.use('/api/v1/parcels', parcelRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/locations', locationRoutes);

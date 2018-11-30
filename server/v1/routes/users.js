@@ -3,7 +3,7 @@ import express from 'express';
 
 // register router
 const router = express.Router();
-import Auth from './../../db/jwt';
+import Auth from '../../db/jwt';
 // import users controller
 import UsersController from './../../controllers/users';
 

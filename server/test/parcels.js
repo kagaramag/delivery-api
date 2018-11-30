@@ -8,14 +8,14 @@ import app from '../app';
 let should = chai.should();
 
 import jwt from "jsonwebtoken";
-import Auth from './../db/jwt';
+import Auth from '../db/jwt';
 // import parcels from '../v1/routes/parcels';
 
 
 chai.use(chaiHttp);
 
 const user = {
-  email: 'userrr@user.com',
+  email: 'test@test.com',
   name: 'John Doe',
   password: '123123',
   state: 'active',
@@ -55,6 +55,20 @@ describe('POST signup', () => {
         done();
       });
     });
+
+    // check if user attempt to sign up again
+    // it('User should be deleted', (done) => {
+    //   chai
+    //   .request(app)
+    //   .delete('/api/v1/auth/delete')
+    //   .send({ email:user.email})
+    //   .end((err, res) => {
+    //     res.should.have.status(200);
+    //     res.body.should.be.a('object');
+    //     res.body.should.have.property('token');
+    //     done();
+    //   });
+    // });
 
   });
 // describe('Parcels delivery orders', () => {

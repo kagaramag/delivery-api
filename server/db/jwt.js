@@ -6,7 +6,9 @@ const isAutheticated = (req, res, next) =>{
       req.token = bearerToken;
       next();
     } else {
-      res.sendStatus(403);
+      res.status(403).send({
+        message:"Whoochs, Access denied. Try to login first!"
+      });
     }
 }
 
